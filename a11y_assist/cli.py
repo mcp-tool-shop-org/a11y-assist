@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+from typing import Callable
 
 import click
 
@@ -21,8 +22,33 @@ from .from_cli_error import (
     load_cli_error,
 )
 from .parse_raw import parse_raw
+from .profiles import apply_cognitive_load, render_cognitive_load
 from .render import AssistResult, render_assist
 from .storage import read_last_log, write_last_log
+
+# Profile registry
+PROFILE_CHOICES = ["lowvision", "cognitive-load"]
+
+
+def get_renderer(profile: str) -> Callable[[AssistResult], str]:
+    """Get the renderer function for a profile."""
+    if profile == "cognitive-load":
+        return render_cognitive_load
+    return render_assist
+
+
+def apply_profile(result: AssistResult, profile: str) -> AssistResult:
+    """Apply profile transformation to result."""
+    if profile == "cognitive-load":
+        return apply_cognitive_load(result)
+    return result
+
+
+def render_with_profile(result: AssistResult, profile: str) -> str:
+    """Transform and render result according to profile."""
+    transformed = apply_profile(result, profile)
+    renderer = get_renderer(profile)
+    return renderer(transformed)
 
 
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
@@ -40,12 +66,18 @@ def main():
     type=click.Path(exists=True, dir_okay=False),
     help="Path to cli.error.v0.1 JSON file.",
 )
-def explain_cmd(json_path: str):
+@click.option(
+    "--profile",
+    type=click.Choice(PROFILE_CHOICES),
+    default="lowvision",
+    help="Accessibility profile (default: lowvision).",
+)
+def explain_cmd(json_path: str, profile: str):
     """Explain a structured cli.error.v0.1 JSON message."""
     try:
         obj = load_cli_error(json_path)
         result = assist_from_cli_error(obj)
-        click.echo(render_assist(result), nl=False)
+        click.echo(render_with_profile(result, profile), nl=False)
     except CliErrorValidationError as e:
         # Low confidence: we couldn't validate
         res = AssistResult(
@@ -60,7 +92,7 @@ def explain_cmd(json_path: str):
             next_safe_commands=[],
             notes=["Validation errors (first 5): " + "; ".join(e.errors[:5])],
         )
-        click.echo(render_assist(res), nl=False)
+        click.echo(render_with_profile(res, profile), nl=False)
         raise SystemExit(2)
 
 
@@ -71,7 +103,13 @@ def explain_cmd(json_path: str):
     is_flag=True,
     help="Read raw CLI output from stdin.",
 )
-def triage_cmd(use_stdin: bool):
+@click.option(
+    "--profile",
+    type=click.Choice(PROFILE_CHOICES),
+    default="lowvision",
+    help="Accessibility profile (default: lowvision).",
+)
+def triage_cmd(use_stdin: bool, profile: str):
     """Triage raw CLI output (best effort)."""
     if not use_stdin:
         click.echo("Use: a11y-assist triage --stdin", err=True)
@@ -108,11 +146,17 @@ def triage_cmd(use_stdin: bool):
         next_safe_commands=[line for line in plan if "--dry-run" in line][:3],
         notes=notes,
     )
-    click.echo(render_assist(res), nl=False)
+    click.echo(render_with_profile(res, profile), nl=False)
 
 
 @main.command("last")
-def last_cmd():
+@click.option(
+    "--profile",
+    type=click.Choice(PROFILE_CHOICES),
+    default="lowvision",
+    help="Accessibility profile (default: lowvision).",
+)
+def last_cmd(profile: str):
     """Assist using the last captured log (~/.a11y-assist/last.log)."""
     text = read_last_log()
     if not text.strip():
@@ -124,7 +168,7 @@ def last_cmd():
             next_safe_commands=[],
             notes=["No last.log found."],
         )
-        click.echo(render_assist(res), nl=False)
+        click.echo(render_with_profile(res, profile), nl=False)
         raise SystemExit(2)
 
     err_id, status, blocks = parse_raw(text)
@@ -144,7 +188,7 @@ def last_cmd():
         next_safe_commands=[line for line in plan if "--dry-run" in line][:3],
         notes=notes,
     )
-    click.echo(render_assist(res), nl=False)
+    click.echo(render_with_profile(res, profile), nl=False)
 
 
 def assist_run():
