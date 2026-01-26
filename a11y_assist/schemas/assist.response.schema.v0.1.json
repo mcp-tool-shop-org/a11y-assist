@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a11y-assist.dev/schemas/assist.response.schema.v0.1.json",
+  "title": "assist.response.v0.1",
+  "description": "Response schema for a11y-assist",
+  "type": "object",
+  "required": ["confidence", "safest_next_step", "plan"],
+  "properties": {
+    "anchored_id": {
+      "type": ["string", "null"],
+      "description": "Error ID this assist is anchored to, if found"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"],
+      "description": "Confidence level of the assist"
+    },
+    "safest_next_step": {
+      "type": "string",
+      "description": "Single safest next action to take"
+    },
+    "plan": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Ordered list of steps to resolve the issue"
+    },
+    "next_safe_commands": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "SAFE-only commands that can be run"
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional notes and context"
+    }
+  },
+  "additionalProperties": false
+}
