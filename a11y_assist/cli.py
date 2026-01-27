@@ -5,14 +5,17 @@ Commands:
 - triage: Best-effort assist from raw text
 - last: Assist from ~/.a11y-assist/last.log
 - assist-run: Wrapper that captures output for `last`
+- ingest: Import findings from a11y-evidence-engine
 """
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from dataclasses import replace
-from typing import Callable, List, Set, Tuple
+from pathlib import Path
+from typing import Callable, List, Optional, Set, Tuple
 
 import click
 
@@ -44,8 +47,37 @@ from .profiles import (
     render_plain_language,
     render_screen_reader,
 )
-from .render import AssistResult, Confidence, Evidence, render_assist
+from .render import AssistResult, Confidence, Evidence, render_assist, to_response_dict
 from .storage import read_last_log, write_last_log
+
+
+def output_result(
+    rendered: str,
+    result: AssistResult,
+    json_response: bool,
+    json_out: Optional[str],
+) -> None:
+    """Output the result according to flags.
+
+    Args:
+        rendered: The rendered text output
+        result: The AssistResult (for JSON serialization)
+        json_response: If True, print JSON instead of rendered text
+        json_out: If set, write JSON to this path (in addition to rendered output)
+    """
+    if json_response:
+        # JSON to stdout instead of rendered text
+        click.echo(json.dumps(to_response_dict(result), indent=2))
+    else:
+        # Rendered text to stdout (default)
+        click.echo(rendered, nl=False)
+
+    # Write JSON to file if requested (regardless of json_response)
+    if json_out:
+        Path(json_out).write_text(
+            json.dumps(to_response_dict(result), indent=2),
+            encoding="utf-8",
+        )
 
 # Profile registry
 PROFILE_CHOICES = [
@@ -173,7 +205,19 @@ def main():
     default="lowvision",
     help="Accessibility profile (default: lowvision).",
 )
-def explain_cmd(json_path: str, profile: str):
+@click.option(
+    "--json-response",
+    "json_response",
+    is_flag=True,
+    help="Output assist.response.v0.1 JSON instead of rendered text.",
+)
+@click.option(
+    "--json-out",
+    "json_out",
+    type=click.Path(dir_okay=False),
+    help="Write assist.response.v0.1 JSON to file (in addition to rendered output).",
+)
+def explain_cmd(json_path: str, profile: str, json_response: bool, json_out: Optional[str]):
     """Explain a structured cli.error.v0.1 JSON message."""
     try:
         obj = load_cli_error(json_path)
@@ -187,7 +231,10 @@ def explain_cmd(json_path: str, profile: str):
             output = render_with_profile_guarded(
                 base_text, result, profile, "cli_error_json"
             )
-            click.echo(output, nl=False)
+            # Get the transformed result for JSON output
+            transformed = apply_profile(result, profile)
+            transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
+            output_result(output, transformed, json_response, json_out)
         except GuardViolation as e:
             _handle_guard_violation(e)
 
@@ -211,7 +258,9 @@ def explain_cmd(json_path: str, profile: str):
             output = render_with_profile_guarded(
                 base_text, res, profile, "cli_error_json"
             )
-            click.echo(output, nl=False)
+            transformed = apply_profile(res, profile)
+            transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
+            output_result(output, transformed, json_response, json_out)
         except GuardViolation as ge:
             _handle_guard_violation(ge)
         raise SystemExit(2)
@@ -230,7 +279,19 @@ def explain_cmd(json_path: str, profile: str):
     default="lowvision",
     help="Accessibility profile (default: lowvision).",
 )
-def triage_cmd(use_stdin: bool, profile: str):
+@click.option(
+    "--json-response",
+    "json_response",
+    is_flag=True,
+    help="Output assist.response.v0.1 JSON instead of rendered text.",
+)
+@click.option(
+    "--json-out",
+    "json_out",
+    type=click.Path(dir_okay=False),
+    help="Write assist.response.v0.1 JSON to file (in addition to rendered output).",
+)
+def triage_cmd(use_stdin: bool, profile: str, json_response: bool, json_out: Optional[str]):
     """Triage raw CLI output (best effort)."""
     if not use_stdin:
         click.echo("Use: a11y-assist triage --stdin", err=True)
@@ -289,7 +350,9 @@ def triage_cmd(use_stdin: bool, profile: str):
 
     try:
         output = render_with_profile_guarded(text, res, profile, "raw_text")
-        click.echo(output, nl=False)
+        transformed = apply_profile(res, profile)
+        transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
+        output_result(output, transformed, json_response, json_out)
     except GuardViolation as e:
         _handle_guard_violation(e)
 
@@ -301,7 +364,19 @@ def triage_cmd(use_stdin: bool, profile: str):
     default="lowvision",
     help="Accessibility profile (default: lowvision).",
 )
-def last_cmd(profile: str):
+@click.option(
+    "--json-response",
+    "json_response",
+    is_flag=True,
+    help="Output assist.response.v0.1 JSON instead of rendered text.",
+)
+@click.option(
+    "--json-out",
+    "json_out",
+    type=click.Path(dir_okay=False),
+    help="Write assist.response.v0.1 JSON to file (in addition to rendered output).",
+)
+def last_cmd(profile: str, json_response: bool, json_out: Optional[str]):
     """Assist using the last captured log (~/.a11y-assist/last.log)."""
     text = read_last_log()
     if not text.strip():
@@ -317,7 +392,9 @@ def last_cmd(profile: str):
         base_text = "No last.log found. Run assist-run command."
         try:
             output = render_with_profile_guarded(base_text, res, profile, "last_log")
-            click.echo(output, nl=False)
+            transformed = apply_profile(res, profile)
+            transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
+            output_result(output, transformed, json_response, json_out)
         except GuardViolation as e:
             _handle_guard_violation(e)
         raise SystemExit(2)
@@ -361,7 +438,9 @@ def last_cmd(profile: str):
 
     try:
         output = render_with_profile_guarded(text, res, profile, "last_log")
-        click.echo(output, nl=False)
+        transformed = apply_profile(res, profile)
+        transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
+        output_result(output, transformed, json_response, json_out)
     except GuardViolation as e:
         _handle_guard_violation(e)
 
@@ -391,3 +470,130 @@ def assist_run():
         print("\nTip: run `a11y-assist last` for help", file=sys.stderr)
 
     raise SystemExit(proc.returncode)
+
+
+@main.command("ingest")
+@click.argument(
+    "findings_path",
+    type=click.Path(exists=True, dir_okay=False),
+)
+@click.option(
+    "--out",
+    "out_dir",
+    type=click.Path(file_okay=False),
+    help="Output directory for derived artifacts (default: alongside findings.json under a11y-assist/).",
+)
+@click.option(
+    "--format",
+    "output_format",
+    type=click.Choice(["text", "json"]),
+    default="text",
+    help="Output format for stdout (default: text).",
+)
+@click.option(
+    "--min-severity",
+    type=click.Choice(["info", "warning", "error"]),
+    default="info",
+    help="Minimum severity to include (default: info).",
+)
+@click.option(
+    "--strict",
+    is_flag=True,
+    help="Fail if evidence_ref files are missing or provenance fails validation.",
+)
+@click.option(
+    "--verify-provenance",
+    is_flag=True,
+    help="Validate each referenced provenance bundle and verify digests.",
+)
+@click.option(
+    "--fail-on",
+    type=click.Choice(["error", "warning", "never"]),
+    default="error",
+    help="Exit nonzero if findings exist at/above this severity (default: error).",
+)
+def ingest_cmd(
+    findings_path: str,
+    out_dir: Optional[str],
+    output_format: str,
+    min_severity: str,
+    strict: bool,
+    verify_provenance: bool,
+    fail_on: str,
+):
+    """Ingest findings from a11y-evidence-engine.
+
+    Takes findings.json and produces:
+    - ingest-summary.json: Normalized stats and grouping
+    - advisories.json: Fix-oriented tasks with evidence links
+    """
+    from .ingest import (
+        IngestError,
+        ingest,
+        render_text_summary,
+        write_advisories,
+        write_ingest_summary,
+    )
+
+    findings = Path(findings_path)
+
+    # Determine output directory
+    if out_dir:
+        out = Path(out_dir)
+    else:
+        out = findings.parent / "a11y-assist"
+
+    # Run ingest
+    try:
+        result = ingest(
+            findings,
+            verify_provenance_flag=(verify_provenance or strict),
+            min_severity=min_severity,
+        )
+    except IngestError as e:
+        click.echo(f"Ingest failed: {e}", err=True)
+        raise SystemExit(3)
+
+    # Check strict mode
+    if strict:
+        if result.provenance_errors:
+            click.echo("Provenance verification failed:", err=True)
+            for err in result.provenance_errors:
+                click.echo(f"  - {err}", err=True)
+            raise SystemExit(3)
+
+    # Write output files
+    write_ingest_summary(result, out / "ingest-summary.json")
+    write_advisories(result, out / "advisories.json")
+
+    # Output to stdout
+    if output_format == "json":
+        summary = {
+            "source_engine": result.source_engine,
+            "source_version": result.source_version,
+            "ingested_at": result.ingested_at,
+            "target": result.target,
+            "summary": result.summary,
+            "by_rule": result.by_rule,
+            "output_dir": str(out),
+        }
+        if verify_provenance or strict:
+            summary["provenance_verified"] = result.provenance_verified
+        click.echo(json.dumps(summary, indent=2))
+    else:
+        click.echo(render_text_summary(result))
+        click.echo(f"\nOutput: {out}")
+
+    # Determine exit code based on --fail-on
+    if fail_on == "never":
+        raise SystemExit(0)
+
+    errors = result.summary.get("errors", 0)
+    warnings = result.summary.get("warnings", 0)
+
+    if fail_on == "error" and errors > 0:
+        raise SystemExit(2)
+    if fail_on == "warning" and (errors > 0 or warnings > 0):
+        raise SystemExit(2)
+
+    raise SystemExit(0)
