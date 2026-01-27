@@ -1,3 +1,61 @@
+# a11y-assist v0.2.2
+
+Fourth stable release of **a11y-assist**, adding the Profile Guard runtime safety system.
+
+## Added
+
+### Profile Guard (`guard.py`)
+Centralized runtime invariant checker that runs after every profile transform:
+
+- **ID Invariant**: Anchored ID cannot be invented or changed
+- **Confidence Invariant**: Confidence cannot increase (only same or decrease)
+- **Commands Invariant**: SAFE-only commands - no invented commands, no commands on Low confidence
+- **Step Count Invariant**: Enforces max steps per profile (lowvision: 5, cognitive-load: 3, screen-reader: 3-5)
+- **Content Support Invariant**: Profile must not add new factual content (WARN only)
+- **Profile-Specific Constraints**: Screen-reader forbids parentheticals and visual references
+
+### Guard API
+- `GuardIssue`: Frozen dataclass for guard violations
+- `GuardViolation`: Exception raised when invariants are violated
+- `GuardContext`: Frozen dataclass with profile rules and constraints
+- `validate_profile_transform()`: Main validation function
+- `get_guard_context()`: Factory function for profile-specific contexts
+
+### Guard Error Output
+Guard failures produce structured error messages:
+```
+[ERROR] A11Y.ASSIST.ENGINE.GUARD.FAIL
+
+What:
+  A profile produced output that violates engine safety rules.
+
+Why:
+  This indicates a bug in a profile transform or renderer.
+
+Fix:
+  Run tests; open an issue; include profile name and guard codes.
+
+Guard codes:
+  - A11Y.ASSIST.GUARD.COMMANDS.INVENTED: Profile included a command not in the allowed set
+```
+
+## Changed
+
+- Version bump to 0.2.2
+- 48 new tests for guard (180 total)
+- All profile transforms now run through guard validation
+
+## Unchanged from v0.2.1
+
+All v0.2.1 features remain stable:
+- Screen-reader profile
+- Cognitive-load profile
+- Low-vision profile (default)
+- Core commands: explain, triage, last, assist-run
+- Safety guarantees: no invented IDs, SAFE-only, deterministic
+
+---
+
 # a11y-assist v0.2.1
 
 Third stable release of **a11y-assist**, adding the screen-reader accessibility profile.

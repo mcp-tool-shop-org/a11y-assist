@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
-from typing import Callable
+from typing import Callable, Set
 
 import click
 
@@ -21,6 +21,7 @@ from .from_cli_error import (
     assist_from_cli_error,
     load_cli_error,
 )
+from .guard import GuardViolation, get_guard_context, validate_profile_transform
 from .parse_raw import parse_raw
 from .profiles import (
     apply_cognitive_load,
@@ -28,7 +29,7 @@ from .profiles import (
     render_cognitive_load,
     render_screen_reader,
 )
-from .render import AssistResult, render_assist
+from .render import AssistResult, Confidence, render_assist
 from .storage import read_last_log, write_last_log
 
 # Profile registry
@@ -53,11 +54,65 @@ def apply_profile(result: AssistResult, profile: str) -> AssistResult:
     return result
 
 
-def render_with_profile(result: AssistResult, profile: str) -> str:
-    """Transform and render result according to profile."""
-    transformed = apply_profile(result, profile)
+def render_with_profile_guarded(
+    base_text: str,
+    base_result: AssistResult,
+    profile: str,
+    input_kind: str,
+) -> str:
+    """Transform and render result according to profile, with guard validation.
+
+    Args:
+        base_text: Original input text for content support checking
+        base_result: Base AssistResult before transformation
+        profile: Profile name to apply
+        input_kind: Type of input (cli_error_json, raw_text, last_log)
+
+    Returns:
+        Rendered output string
+
+    Raises:
+        GuardViolation: If profile transform violates invariants
+    """
+    # Apply profile transformation
+    transformed = apply_profile(base_result, profile)
+
+    # Get allowed commands from base result
+    allowed_commands: Set[str] = set(base_result.next_safe_commands)
+
+    # Create guard context
+    ctx = get_guard_context(
+        profile=profile,
+        confidence=base_result.confidence,
+        input_kind=input_kind,
+        allowed_commands=allowed_commands,
+    )
+
+    # Validate the transformation
+    validate_profile_transform(base_text, base_result, transformed, ctx)
+
+    # Render
     renderer = get_renderer(profile)
     return renderer(transformed)
+
+
+def _handle_guard_violation(e: GuardViolation) -> None:
+    """Handle a guard violation by printing error and exiting."""
+    click.echo("[ERROR] A11Y.ASSIST.ENGINE.GUARD.FAIL", err=True)
+    click.echo("", err=True)
+    click.echo("What:", err=True)
+    click.echo("  A profile produced output that violates engine safety rules.", err=True)
+    click.echo("", err=True)
+    click.echo("Why:", err=True)
+    click.echo("  This indicates a bug in a profile transform or renderer.", err=True)
+    click.echo("", err=True)
+    click.echo("Fix:", err=True)
+    click.echo("  Run tests; open an issue; include profile name and guard codes.", err=True)
+    click.echo("", err=True)
+    click.echo("Guard codes:", err=True)
+    for issue in e.issues:
+        click.echo(f"  - {issue.code}: {issue.message}", err=True)
+    raise SystemExit(2)
 
 
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
@@ -86,7 +141,19 @@ def explain_cmd(json_path: str, profile: str):
     try:
         obj = load_cli_error(json_path)
         result = assist_from_cli_error(obj)
-        click.echo(render_with_profile(result, profile), nl=False)
+
+        # Read the original JSON for content support checking
+        with open(json_path) as f:
+            base_text = f.read()
+
+        try:
+            output = render_with_profile_guarded(
+                base_text, result, profile, "cli_error_json"
+            )
+            click.echo(output, nl=False)
+        except GuardViolation as e:
+            _handle_guard_violation(e)
+
     except CliErrorValidationError as e:
         # Low confidence: we couldn't validate
         res = AssistResult(
@@ -101,7 +168,15 @@ def explain_cmd(json_path: str, profile: str):
             next_safe_commands=[],
             notes=["Validation errors (first 5): " + "; ".join(e.errors[:5])],
         )
-        click.echo(render_with_profile(res, profile), nl=False)
+        # For validation errors, base_text is the error message itself
+        base_text = "; ".join(e.errors)
+        try:
+            output = render_with_profile_guarded(
+                base_text, res, profile, "cli_error_json"
+            )
+            click.echo(output, nl=False)
+        except GuardViolation as ge:
+            _handle_guard_violation(ge)
         raise SystemExit(2)
 
 
@@ -128,7 +203,7 @@ def triage_cmd(use_stdin: bool, profile: str):
     err_id, status, blocks = parse_raw(text)
 
     notes = []
-    confidence: str = "Low"
+    confidence: Confidence = "Low"
     if err_id:
         confidence = "Medium"
     else:
@@ -149,13 +224,18 @@ def triage_cmd(use_stdin: bool, profile: str):
 
     res = AssistResult(
         anchored_id=err_id,
-        confidence=confidence,  # type: ignore[arg-type]
+        confidence=confidence,
         safest_next_step=safest,
         plan=plan,
         next_safe_commands=[line for line in plan if "--dry-run" in line][:3],
         notes=notes,
     )
-    click.echo(render_with_profile(res, profile), nl=False)
+
+    try:
+        output = render_with_profile_guarded(text, res, profile, "raw_text")
+        click.echo(output, nl=False)
+    except GuardViolation as e:
+        _handle_guard_violation(e)
 
 
 @main.command("last")
@@ -177,11 +257,17 @@ def last_cmd(profile: str):
             next_safe_commands=[],
             notes=["No last.log found."],
         )
-        click.echo(render_with_profile(res, profile), nl=False)
+        # For empty last log, use the error message as base text
+        base_text = "No last.log found. Run assist-run command."
+        try:
+            output = render_with_profile_guarded(base_text, res, profile, "last_log")
+            click.echo(output, nl=False)
+        except GuardViolation as e:
+            _handle_guard_violation(e)
         raise SystemExit(2)
 
     err_id, status, blocks = parse_raw(text)
-    confidence: str = "Medium" if err_id else "Low"
+    confidence: Confidence = "Medium" if err_id else "Low"
     notes = [] if err_id else ["No (ID: ...) found in last.log."]
 
     plan = blocks.get("Fix:", []) or [
@@ -191,13 +277,18 @@ def last_cmd(profile: str):
 
     res = AssistResult(
         anchored_id=err_id,
-        confidence=confidence,  # type: ignore[arg-type]
+        confidence=confidence,
         safest_next_step="Start with the first Fix step. Prefer non-destructive checks.",
         plan=plan,
         next_safe_commands=[line for line in plan if "--dry-run" in line][:3],
         notes=notes,
     )
-    click.echo(render_with_profile(res, profile), nl=False)
+
+    try:
+        output = render_with_profile_guarded(text, res, profile, "last_log")
+        click.echo(output, nl=False)
+    except GuardViolation as e:
+        _handle_guard_violation(e)
 
 
 def assist_run():
