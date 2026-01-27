@@ -1,3 +1,50 @@
+# a11y-assist v0.3.1
+
+Sixth stable release of **a11y-assist**, adding audit metadata support for traceability.
+
+## Added
+
+### Methods metadata (audit-only)
+Optional metadata fields in `assist.response.v0.1` for auditing and traceability:
+
+- `methods_applied`: List of stable method identifiers (e.g., `engine.normalize.from_cli_error_v0_1`, `profile.screen_reader.apply`, `guard.validate_profile_transform`)
+- `evidence`: Source anchors mapping output fields back to input (e.g., `plan[0]` → `cli.error.fix[0]`)
+
+Rules:
+- Metadata does not affect rendering output (golden tests unchanged)
+- Method IDs are append-only and stable once published
+- Evidence anchors are deterministic and lightweight
+
+### New module: `a11y_assist.methods`
+Helper functions for adding methods and evidence:
+- `with_method()`, `with_methods()` - add method IDs
+- `with_evidence()` - add evidence anchors
+- `evidence_for_plan()` - generate plan step evidence
+
+### Governance artifacts
+- `CONTRIBUTING.md` - contributor guidelines and core principles
+- Golden fixtures (`tests/fixtures/`) - frozen expected outputs for all 5 profiles
+- `tests/test_golden.py` - exact string match tests against fixtures
+- `tests/test_methods_metadata.py` - 16 tests for metadata correctness
+
+## Changed
+
+- Version bump to 0.3.1
+- ENGINE.md updated to v0.3.1 with §14 Methods metadata
+- Response schema updated with optional `methods_applied` and `evidence` properties
+- 253 tests total (16 new metadata tests + 7 golden tests)
+
+## Unchanged from v0.3.0
+
+All v0.3.0 features remain stable:
+- Dyslexia and plain-language profiles
+- All existing profiles (lowvision, cognitive-load, screen-reader)
+- Profile Guard runtime safety
+- Core commands: explain, triage, last, assist-run
+- Safety guarantees: no invented IDs, SAFE-only, deterministic
+
+---
+
 # a11y-assist v0.3.0
 
 Fifth stable release of **a11y-assist**, completing the inclusive profile set with dyslexia and plain-language profiles.

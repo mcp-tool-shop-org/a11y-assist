@@ -8,11 +8,12 @@ from __future__ import annotations
 import json
 from importlib import resources
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 from jsonschema import Draft202012Validator
 
-from .render import AssistResult
+from .methods import METHOD_NORMALIZE_CLI_ERROR, evidence_for_plan
+from .render import AssistResult, Evidence
 
 
 def _load_schema(name: str) -> Dict[str, Any]:
@@ -112,6 +113,30 @@ def assist_from_cli_error(obj: Dict[str, Any]) -> AssistResult:
         "This assist block is additive; it does not replace the tool's output.",
     ]
 
+    # Build evidence anchors for traceability
+    evidence: List[Evidence] = []
+
+    # Evidence for safest_next_step
+    if why:
+        evidence.append(Evidence(field="safest_next_step", source="cli.error.why[0]"))
+    else:
+        evidence.append(Evidence(field="safest_next_step", source="cli.error.fix[0]"))
+
+    # Evidence for plan steps (map to fix lines)
+    evidence.extend(evidence_for_plan(plan, source_prefix="cli.error.fix"))
+
+    # Evidence for safe commands (track which fix line they came from)
+    for i, cmd in enumerate(safe_filtered[:3]):
+        # Find the original fix line index
+        for j, fix_line in enumerate(fix):
+            if cmd in fix_line or (
+                fix_line.lower().startswith("re-run:") and cmd == fix_line.split(":", 1)[1].strip()
+            ):
+                evidence.append(
+                    Evidence(field=f"next_safe_commands[{i}]", source=f"cli.error.fix[{j}]")
+                )
+                break
+
     return AssistResult(
         anchored_id=err_id if isinstance(err_id, str) else None,
         confidence="High",
@@ -119,4 +144,6 @@ def assist_from_cli_error(obj: Dict[str, Any]) -> AssistResult:
         plan=plan,
         next_safe_commands=safe_filtered[:3],
         notes=notes,
+        methods_applied=(METHOD_NORMALIZE_CLI_ERROR,),
+        evidence=tuple(evidence),
     )

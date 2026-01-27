@@ -11,7 +11,8 @@ from __future__ import annotations
 
 import subprocess
 import sys
-from typing import Callable, Set
+from dataclasses import replace
+from typing import Callable, List, Set, Tuple
 
 import click
 
@@ -22,6 +23,16 @@ from .from_cli_error import (
     load_cli_error,
 )
 from .guard import GuardViolation, get_guard_context, validate_profile_transform
+from .methods import (
+    METHOD_GUARD_VALIDATE,
+    METHOD_NORMALIZE_RAW_TEXT,
+    METHOD_PROFILE_COGNITIVE_LOAD,
+    METHOD_PROFILE_DYSLEXIA,
+    METHOD_PROFILE_LOWVISION,
+    METHOD_PROFILE_PLAIN_LANGUAGE,
+    METHOD_PROFILE_SCREEN_READER,
+    with_method,
+)
 from .parse_raw import parse_raw
 from .profiles import (
     apply_cognitive_load,
@@ -33,7 +44,7 @@ from .profiles import (
     render_plain_language,
     render_screen_reader,
 )
-from .render import AssistResult, Confidence, render_assist
+from .render import AssistResult, Confidence, Evidence, render_assist
 from .storage import read_last_log, write_last_log
 
 # Profile registry
@@ -60,16 +71,21 @@ def get_renderer(profile: str) -> Callable[[AssistResult], str]:
 
 
 def apply_profile(result: AssistResult, profile: str) -> AssistResult:
-    """Apply profile transformation to result."""
+    """Apply profile transformation to result and add method ID."""
     if profile == "cognitive-load":
-        return apply_cognitive_load(result)
+        transformed = apply_cognitive_load(result)
+        return with_method(transformed, METHOD_PROFILE_COGNITIVE_LOAD)
     if profile == "screen-reader":
-        return apply_screen_reader(result)
+        transformed = apply_screen_reader(result)
+        return with_method(transformed, METHOD_PROFILE_SCREEN_READER)
     if profile == "dyslexia":
-        return apply_dyslexia(result)
+        transformed = apply_dyslexia(result)
+        return with_method(transformed, METHOD_PROFILE_DYSLEXIA)
     if profile == "plain-language":
-        return apply_plain_language(result)
-    return result
+        transformed = apply_plain_language(result)
+        return with_method(transformed, METHOD_PROFILE_PLAIN_LANGUAGE)
+    # Default: lowvision (no transform, just add method)
+    return with_method(result, METHOD_PROFILE_LOWVISION)
 
 
 def render_with_profile_guarded(
@@ -92,7 +108,7 @@ def render_with_profile_guarded(
     Raises:
         GuardViolation: If profile transform violates invariants
     """
-    # Apply profile transformation
+    # Apply profile transformation (adds profile method ID)
     transformed = apply_profile(base_result, profile)
 
     # Get allowed commands from base result
@@ -109,7 +125,10 @@ def render_with_profile_guarded(
     # Validate the transformation
     validate_profile_transform(base_text, base_result, transformed, ctx)
 
-    # Render
+    # Add guard method ID after validation passes
+    transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
+
+    # Render (metadata is not rendered, only stored in result)
     renderer = get_renderer(profile)
     return renderer(transformed)
 
@@ -220,7 +239,7 @@ def triage_cmd(use_stdin: bool, profile: str):
     text = sys.stdin.read()
     err_id, status, blocks = parse_raw(text)
 
-    notes = []
+    notes: List[str] = []
     confidence: Confidence = "Low"
     if err_id:
         confidence = "Medium"
@@ -228,7 +247,7 @@ def triage_cmd(use_stdin: bool, profile: str):
         notes.append("No (ID: ...) found. Emit cli.error.v0.1 for high-confidence assist.")
 
     safest = "Follow the tool's Fix steps, starting with the least risky check."
-    plan = []
+    plan: List[str] = []
 
     fix_lines = blocks.get("Fix:", [])
     if fix_lines:
@@ -240,13 +259,32 @@ def triage_cmd(use_stdin: bool, profile: str):
             "If this is your tool, adopt cli.error.v0.1 JSON output.",
         ]
 
+    # Build evidence for raw text
+    evidence: List[Evidence] = []
+    if fix_lines:
+        evidence.append(Evidence(field="safest_next_step", source="raw_text:Fix:1"))
+        for i, _ in enumerate(plan):
+            evidence.append(Evidence(field=f"plan[{i}]", source=f"raw_text:Fix:{i+1}"))
+
+    safe_cmds = [line for line in plan if "--dry-run" in line][:3]
+    for i, cmd in enumerate(safe_cmds):
+        # Find which fix line it came from
+        for j, fix_line in enumerate(plan):
+            if cmd == fix_line:
+                evidence.append(
+                    Evidence(field=f"next_safe_commands[{i}]", source=f"raw_text:Fix:{j+1}")
+                )
+                break
+
     res = AssistResult(
         anchored_id=err_id,
         confidence=confidence,
         safest_next_step=safest,
         plan=plan,
-        next_safe_commands=[line for line in plan if "--dry-run" in line][:3],
+        next_safe_commands=safe_cmds,
         notes=notes,
+        methods_applied=(METHOD_NORMALIZE_RAW_TEXT,),
+        evidence=tuple(evidence),
     )
 
     try:
@@ -286,20 +324,39 @@ def last_cmd(profile: str):
 
     err_id, status, blocks = parse_raw(text)
     confidence: Confidence = "Medium" if err_id else "Low"
-    notes = [] if err_id else ["No (ID: ...) found in last.log."]
+    notes: List[str] = [] if err_id else ["No (ID: ...) found in last.log."]
 
-    plan = blocks.get("Fix:", []) or [
+    fix_lines = blocks.get("Fix:", [])
+    plan: List[str] = fix_lines or [
         "Re-run with verbosity.",
         "Adopt cli.error.v0.1 output for high-confidence assistance.",
     ]
+
+    # Build evidence for last.log (same as raw_text)
+    evidence: List[Evidence] = []
+    if fix_lines:
+        evidence.append(Evidence(field="safest_next_step", source="raw_text:Fix:1"))
+        for i, _ in enumerate(plan):
+            evidence.append(Evidence(field=f"plan[{i}]", source=f"raw_text:Fix:{i+1}"))
+
+    safe_cmds = [line for line in plan if "--dry-run" in line][:3]
+    for i, cmd in enumerate(safe_cmds):
+        for j, fix_line in enumerate(plan):
+            if cmd == fix_line:
+                evidence.append(
+                    Evidence(field=f"next_safe_commands[{i}]", source=f"raw_text:Fix:{j+1}")
+                )
+                break
 
     res = AssistResult(
         anchored_id=err_id,
         confidence=confidence,
         safest_next_step="Start with the first Fix step. Prefer non-destructive checks.",
         plan=plan,
-        next_safe_commands=[line for line in plan if "--dry-run" in line][:3],
+        next_safe_commands=safe_cmds,
         notes=notes,
+        methods_applied=(METHOD_NORMALIZE_RAW_TEXT,),
+        evidence=tuple(evidence),
     )
 
     try:

@@ -5,15 +5,27 @@ Clear labels, spacing, short lines.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import List, Literal, Optional
+from dataclasses import dataclass, field
+from typing import List, Literal, Optional, Tuple
 
 Confidence = Literal["High", "Medium", "Low"]
 
 
 @dataclass(frozen=True)
+class Evidence:
+    """Source anchor for audit traceability.
+
+    Maps an output field back to its input source.
+    """
+
+    field: str  # e.g., "safest_next_step", "plan[0]"
+    source: str  # e.g., "cli.error.fix[1]", "raw_text:Fix:2"
+    note: Optional[str] = None
+
+
+@dataclass(frozen=True)
 class AssistResult:
-    """Structured assist result."""
+    """Structured assist result with optional audit metadata."""
 
     anchored_id: Optional[str]
     confidence: Confidence
@@ -21,6 +33,10 @@ class AssistResult:
     plan: List[str]
     next_safe_commands: List[str]  # SAFE-only in v0.1
     notes: List[str]
+
+    # Optional audit metadata (does not affect rendering)
+    methods_applied: Tuple[str, ...] = field(default_factory=tuple)
+    evidence: Tuple[Evidence, ...] = field(default_factory=tuple)
 
 
 def render_assist(result: AssistResult) -> str:

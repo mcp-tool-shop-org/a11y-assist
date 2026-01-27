@@ -1,6 +1,6 @@
 # Ally Engine Contract (a11y-assist)
 
-**Status:** Finalized (v0.2.2)
+**Status:** Finalized (v0.3.1)
 **Scope:** Engine-level guarantees and invariants
 
 Ally is a deterministic recovery engine for CLI failures.
@@ -83,6 +83,8 @@ Optional:
 - `anchored_id` – string or null
 - `next_safe_commands` – SAFE commands only
 - `notes`
+- `methods_applied` – audit-only method identifiers (see §15)
+- `evidence` – audit-only source anchors (see §15)
 
 This schema is the engine contract.
 Human-readable output is a *rendering* of this structure.
@@ -161,13 +163,15 @@ AssistResult (base) → AssistResult (profiled)
 - increasing confidence
 - bypassing safety rules
 
-### 6.2 Built-in profiles (v0.2.2)
+### 6.2 Built-in profiles (v0.3.x)
 
 | Profile | Purpose |
 |---------|---------|
 | lowvision | Visual clarity, spacing, redundancy |
 | cognitive-load | Reduce steps and complexity |
 | screen-reader | Audio-first, spoken-friendly output |
+| dyslexia | Reduced reading friction, explicit labels |
+| plain-language | Maximum clarity, one clause per sentence |
 
 Adding a new profile is non-breaking.
 Changing semantics of an existing profile is a breaking change.
@@ -182,7 +186,7 @@ The Profile Guard enforces engine invariants after every profile transform.
 
 Guard violations indicate engine bugs, not user errors.
 
-### 7.2 Enforced invariants (v0.2.2)
+### 7.2 Enforced invariants (v0.3.x)
 
 **Hard errors (fail execution):**
 
@@ -288,10 +292,13 @@ Every release must include:
 - Determinism tests (same input → same output)
 - Guard unit tests for every invariant
 - Profile integration tests
-- Golden tests for:
+- Golden tests for all profiles:
   - lowvision
   - cognitive-load
   - screen-reader
+  - dyslexia
+  - plain-language
+- Methods metadata tests (if metadata is present, it must not affect deterministic output)
 
 If a change cannot be proven safe by tests, it must not ship.
 
@@ -309,7 +316,48 @@ When this happens, MCP will be a thin adapter over the engine API.
 
 ---
 
-## 14. Design philosophy (final)
+## 14. Methods metadata (optional, audit-only)
+
+Ally may emit optional metadata fields in `assist.response.v0.1` to support auditing and future "methods/tests" mapping.
+These fields must not change engine behavior and must not be required.
+
+### 14.1 methods_applied
+
+Optional list of stable method identifiers indicating which deterministic procedures contributed to the output.
+
+Examples:
+- `engine.normalize.from_cli_error_v0_1`
+- `profile.screen_reader.apply`
+- `guard.validate_profile_transform`
+
+Rules:
+- append-only and stable once published
+- identifiers are descriptive, not user-facing UI
+- may be omitted or empty
+
+### 14.2 evidence
+
+Optional list of lightweight source anchors mapping output text back to input text.
+
+Each evidence entry references:
+- `field`: which output field it supports (e.g., `safest_next_step`, `plan[0]`)
+- `source`: where it came from (e.g., `cli.error.fix[1]`, `cli.error.why[0]`, `raw_text:Fix:2`)
+- optional `note`
+
+Rules:
+- anchors must be deterministic
+- no large blobs; references only
+- may be omitted or empty
+
+### 14.3 Rendering and testing
+
+- Renderers must ignore metadata by default (no visible output change)
+- Golden fixtures compare rendered text only; metadata does not affect comparison
+- Dedicated metadata tests verify correctness without affecting golden test stability
+
+---
+
+## 15. Design philosophy (final)
 
 > Accessibility is not a feature.
 > It is a contract—explicit, testable, enforced, and safe.
