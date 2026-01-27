@@ -25,15 +25,25 @@ from .guard import GuardViolation, get_guard_context, validate_profile_transform
 from .parse_raw import parse_raw
 from .profiles import (
     apply_cognitive_load,
+    apply_dyslexia,
+    apply_plain_language,
     apply_screen_reader,
     render_cognitive_load,
+    render_dyslexia,
+    render_plain_language,
     render_screen_reader,
 )
 from .render import AssistResult, Confidence, render_assist
 from .storage import read_last_log, write_last_log
 
 # Profile registry
-PROFILE_CHOICES = ["lowvision", "cognitive-load", "screen-reader"]
+PROFILE_CHOICES = [
+    "lowvision",
+    "cognitive-load",
+    "screen-reader",
+    "dyslexia",
+    "plain-language",
+]
 
 
 def get_renderer(profile: str) -> Callable[[AssistResult], str]:
@@ -42,6 +52,10 @@ def get_renderer(profile: str) -> Callable[[AssistResult], str]:
         return render_cognitive_load
     if profile == "screen-reader":
         return render_screen_reader
+    if profile == "dyslexia":
+        return render_dyslexia
+    if profile == "plain-language":
+        return render_plain_language
     return render_assist
 
 
@@ -51,6 +65,10 @@ def apply_profile(result: AssistResult, profile: str) -> AssistResult:
         return apply_cognitive_load(result)
     if profile == "screen-reader":
         return apply_screen_reader(result)
+    if profile == "dyslexia":
+        return apply_dyslexia(result)
+    if profile == "plain-language":
+        return apply_plain_language(result)
     return result
 
 

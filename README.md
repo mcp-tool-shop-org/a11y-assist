@@ -6,7 +6,7 @@
 
 Low-vision-first assistant for CLI failures.
 
-**v0.2 is non-interactive and deterministic.**
+**v0.3 is non-interactive and deterministic.**
 It never rewrites tool output. It only adds an `ASSIST` block.
 
 ## Install
@@ -50,12 +50,20 @@ a11y-assist explain --json message.json --profile cognitive-load
 
 # Screen-reader profile (TTS-optimized, expanded abbreviations)
 a11y-assist explain --json message.json --profile screen-reader
+
+# Dyslexia profile (reduced reading friction, explicit labels)
+a11y-assist explain --json message.json --profile dyslexia
+
+# Plain-language profile (maximum clarity, one clause per sentence)
+a11y-assist explain --json message.json --profile plain-language
 ```
 
 Available profiles:
 - **lowvision** (default): Clear labels, numbered steps, SAFE commands
 - **cognitive-load**: Reduced cognitive load for ADHD, autism, anxiety, or stress
 - **screen-reader**: TTS-optimized for screen readers, braille displays, listen-first workflows
+- **dyslexia**: Reduced reading friction, explicit labels, no symbolic emphasis
+- **plain-language**: Maximum clarity, one clause per sentence, simplified structure
 
 ## Output Format
 

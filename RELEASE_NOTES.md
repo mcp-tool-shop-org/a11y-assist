@@ -1,3 +1,61 @@
+# a11y-assist v0.3.0
+
+Fifth stable release of **a11y-assist**, completing the inclusive profile set with dyslexia and plain-language profiles.
+
+## Added
+
+### Dyslexia profile (`--profile dyslexia`)
+Reduces reading friction without reducing information:
+
+- Extra vertical spacing between sections
+- One idea per line
+- Explicit labels (never implied by formatting)
+- "Step N:" prefix for predictable structure
+- No parentheticals
+- No symbolic emphasis (*, _, →)
+- No visual navigation references
+- Abbreviations expanded (CLI → command line, ID → I D)
+- Max 5 steps, max 2 notes
+
+### Plain-language profile (`--profile plain-language`)
+Maximizes understandability through simplicity:
+
+- Active voice, present tense
+- One clause per sentence
+- Subordinate clauses removed
+- Conjunctions split (keeps first clause)
+- No parentheticals
+- Simple numeric step labels
+- Max 4 steps, max 1 command
+- Notes omitted for clarity
+
+### Complete inclusive profile set
+Ally now supports five principled profiles:
+
+| Profile | Primary benefit |
+|---------|-----------------|
+| lowvision | Visual clarity |
+| cognitive-load | Reduced mental steps |
+| screen-reader | Audio-first |
+| dyslexia | Reduced reading friction |
+| plain-language | Maximum clarity |
+
+## Changed
+
+- Version bump to 0.3.0
+- 50 new tests for dyslexia and plain-language (230 total)
+- Guard updated to enforce dyslexia and plain-language constraints
+
+## Unchanged from v0.2.2
+
+All v0.2.2 features remain stable:
+- Profile Guard runtime safety
+- Screen-reader, cognitive-load, lowvision profiles
+- Core commands: explain, triage, last, assist-run
+- Safety guarantees: no invented IDs, SAFE-only, deterministic
+
+---
+
 # a11y-assist v0.2.2
 
 Fourth stable release of **a11y-assist**, adding the Profile Guard runtime safety system.

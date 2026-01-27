@@ -401,7 +401,7 @@ def get_guard_context(
     """Create a GuardContext for a profile.
 
     Args:
-        profile: Profile name (lowvision, cognitive-load, screen-reader)
+        profile: Profile name (lowvision, cognitive-load, screen-reader, dyslexia, plain-language)
         confidence: Confidence level from base result
         input_kind: Type of input (cli_error_json, raw_text, etc.)
         allowed_commands: Set of allowed SAFE commands from base
@@ -424,6 +424,13 @@ def get_guard_context(
         forbid_visual_refs = True
         # Screen-reader: 5 steps normally, 3 on Low confidence
         max_steps = 3 if confidence == "Low" else 5
+    elif profile == "dyslexia":
+        forbid_parentheticals = True
+        forbid_visual_refs = True
+        max_steps = 5
+    elif profile == "plain-language":
+        forbid_parentheticals = True
+        max_steps = 4
 
     return GuardContext(
         profile=profile,
