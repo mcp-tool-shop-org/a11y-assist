@@ -1,3 +1,3 @@
 """a11y-assist: Low-vision-first assistant for CLI failures."""
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"

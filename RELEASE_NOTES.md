@@ -1,3 +1,63 @@
+# a11y-assist v0.2.1
+
+Third stable release of **a11y-assist**, adding the screen-reader accessibility profile.
+
+## Added
+
+### Screen-reader profile (`--profile screen-reader`)
+Designed for users consuming output via:
+- Screen readers / TTS
+- Braille displays
+- Listen-first workflows (hands busy, eyes fatigued)
+
+Features:
+- Spoken-friendly headers (periods instead of colons)
+- "Step N:" labels for predictable listening
+- Abbreviations expanded (CLI → command line, ID → I D, JSON → J S O N, SFTP → S F T P)
+- No visual navigation references (above, below, left, right, arrow)
+- No parentheticals (screen readers read them awkwardly)
+- Low confidence reduces to 3 steps (less listening time)
+- Summary line for quick context
+
+### Profile selection now includes screen-reader
+All commands support `--profile lowvision|cognitive-load|screen-reader`:
+- `a11y-assist explain --json <path> --profile screen-reader`
+- `a11y-assist triage --stdin --profile screen-reader`
+- `a11y-assist last --profile screen-reader`
+
+### Screen-reader invariants (in addition to base invariants)
+- No meaning in punctuation/formatting alone
+- No "visual navigation" references
+- Avoid parentheticals as meaning carriers
+- Abbreviations expanded for TTS clarity
+
+## Changed
+
+- Version bump to 0.2.1
+- 56 new tests for screen-reader profile (132 total)
+
+## Unchanged from v0.2.0
+
+All v0.2.0 features remain stable:
+- Cognitive-load profile (`--profile cognitive-load`)
+- Low-vision profile (`--profile lowvision`, default)
+- Core commands: explain, triage, last, assist-run
+- Safety guarantees: no invented IDs, SAFE-only, deterministic
+
+## Stability guarantees
+
+- v0.2.x output format is considered stable for all three profiles
+- No breaking changes without a major version bump
+- Interactive or AI-assisted features will not be added to v0.x
+
+## What's next (v0.3.0)
+
+- Optional interactive mode
+- Pluggable AI backends (opt-in)
+- Deeper integration with a11y-ci workflows
+
+---
+
 # a11y-assist v0.2.0
 
 Second stable release of **a11y-assist**, adding the cognitive-load accessibility profile.
@@ -37,33 +97,6 @@ The cognitive-load profile enforces strict invariants:
 
 - Default profile is `lowvision` (backward compatible)
 - Version bump to 0.2.0
-
-## Unchanged from v0.1.0
-
-### Core commands
-- `a11y-assist explain --json <path>` - High-confidence from cli.error.v0.1 JSON
-- `a11y-assist triage --stdin` - Best-effort from raw text
-- `a11y-assist last` - From ~/.a11y-assist/last.log
-- `assist-run <command>` - Wrapper capturing output
-
-### Safety guarantees
-- Original CLI output is never modified
-- No invented error IDs
-- SAFE-only command suggestions
-- No network calls or background services
-
-## Stability guarantees
-
-- v0.2 output format is considered stable for both profiles
-- No breaking changes without a major version bump
-- Interactive or AI-assisted features will not be added to v0.x
-
-## What's next (v0.3.0)
-
-- Optional interactive mode
-- Pluggable AI backends (opt-in)
-- Additional accessibility profiles
-- Deeper integration with a11y-ci workflows
 
 ---
 

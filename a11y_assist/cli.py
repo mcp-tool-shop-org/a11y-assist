@@ -22,18 +22,25 @@ from .from_cli_error import (
     load_cli_error,
 )
 from .parse_raw import parse_raw
-from .profiles import apply_cognitive_load, render_cognitive_load
+from .profiles import (
+    apply_cognitive_load,
+    apply_screen_reader,
+    render_cognitive_load,
+    render_screen_reader,
+)
 from .render import AssistResult, render_assist
 from .storage import read_last_log, write_last_log
 
 # Profile registry
-PROFILE_CHOICES = ["lowvision", "cognitive-load"]
+PROFILE_CHOICES = ["lowvision", "cognitive-load", "screen-reader"]
 
 
 def get_renderer(profile: str) -> Callable[[AssistResult], str]:
     """Get the renderer function for a profile."""
     if profile == "cognitive-load":
         return render_cognitive_load
+    if profile == "screen-reader":
+        return render_screen_reader
     return render_assist
 
 
@@ -41,6 +48,8 @@ def apply_profile(result: AssistResult, profile: str) -> AssistResult:
     """Apply profile transformation to result."""
     if profile == "cognitive-load":
         return apply_cognitive_load(result)
+    if profile == "screen-reader":
+        return apply_screen_reader(result)
     return result
 
 

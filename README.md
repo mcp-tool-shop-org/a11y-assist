@@ -47,11 +47,15 @@ a11y-assist explain --json message.json --profile lowvision
 
 # Cognitive-load profile (reduced, max 3 steps, First/Next/Last labels)
 a11y-assist explain --json message.json --profile cognitive-load
+
+# Screen-reader profile (TTS-optimized, expanded abbreviations)
+a11y-assist explain --json message.json --profile screen-reader
 ```
 
 Available profiles:
 - **lowvision** (default): Clear labels, numbered steps, SAFE commands
 - **cognitive-load**: Reduced cognitive load for ADHD, autism, anxiety, or stress
+- **screen-reader**: TTS-optimized for screen readers, braille displays, listen-first workflows
 
 ## Output Format
 
@@ -107,6 +111,36 @@ Key differences:
 - One SAFE command max (vs 3)
 - Shorter, simpler sentences
 - No parentheticals or verbose explanations
+
+### Screen Reader Profile
+
+Designed for users consuming output via screen readers, TTS, or braille displays:
+
+```
+ASSIST. Profile: Screen reader.
+Anchored I D: PAY.EXPORT.SFTP.AUTH.
+Confidence: High.
+
+Summary: Payment export failed.
+
+Safest next step: Confirm the credential method used for S F T P.
+
+Steps:
+Step 1: Verify the username and password or the S S H key.
+Step 2: Run the dry run export.
+Step 3: Retry the upload.
+
+Next safe command:
+payroll export --batch 2026-01-26 --dry-run
+```
+
+Key differences:
+- Spoken-friendly headers (periods instead of colons)
+- "Step N:" labels for predictable listening
+- Abbreviations expanded (CLI → command line, ID → I D, JSON → J S O N)
+- No visual navigation references (above, below, arrow)
+- No parentheticals (screen readers read them awkwardly)
+- Low confidence reduces to 3 steps (less listening time)
 
 ## Confidence Levels
 
