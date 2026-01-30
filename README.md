@@ -1,3 +1,8 @@
+> ⚠️ **This repository has moved to [accessibility-suite](https://github.com/mcp-tool-shop/accessibility-suite)**
+> Source now lives at: `src/a11y-assist/`
+
+---
+
 # a11y-assist
 
 ![assist](https://img.shields.io/badge/assist-low--vision--first-blue)
@@ -186,6 +191,28 @@ my-tool --json 2> error.json
 # Get high-confidence assist
 a11y-assist explain --json error.json
 ```
+
+## Integration (CI / Pipelines)
+
+For automation, use `--json-response` to get machine-readable output:
+
+```bash
+# JSON to stdout (instead of rendered text)
+a11y-assist explain --json error.json --json-response
+
+# JSON to file + rendered text to stdout
+a11y-assist explain --json error.json --json-out assist.json
+```
+
+The JSON output follows `assist.response.v0.1` schema and includes:
+- `confidence`: High | Medium | Low
+- `safest_next_step`: One-sentence recommendation
+- `plan`: Ordered list of steps
+- `next_safe_commands`: SAFE-only commands (if any)
+- `methods_applied`: Audit trail of engine methods used
+- `evidence`: Source anchors mapping output to input
+
+See [METHODS_CATALOG.md](METHODS_CATALOG.md) for the full list of method IDs.
 
 ## License
 
