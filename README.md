@@ -1,19 +1,29 @@
-> ⚠️ **This repository has moved to [accessibility-suite](https://github.com/mcp-tool-shop/accessibility-suite)**
-> Source now lives at: `src/a11y-assist/`
-
+<p align="center">
+  <img src="logo.png" alt="a11y-assist logo" width="140" />
+</p>
+<h1 align="center">a11y-assist</h1>
+<p align="center">
+  <strong>Low-vision-first assistant for CLI failures. Additive, deterministic, safe.</strong><br/>
+  Part of <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+</p>
+<p align="center">
+  <a href="https://pypi.org/project/a11y-assist/"><img src="https://img.shields.io/pypi/v/a11y-assist?color=blue" alt="PyPI version" /></a>
+  <img src="https://img.shields.io/badge/assist-low--vision--first-blue" alt="assist" />
+  <img src="https://img.shields.io/badge/commands-SAFE--only-green" alt="safe" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
+</p>
 ---
-
-# a11y-assist
-
-![assist](https://img.shields.io/badge/assist-low--vision--first-blue)
-![safe](https://img.shields.io/badge/commands-SAFE--only-green)
-![license](https://img.shields.io/badge/license-MIT-black)
-
-Low-vision-first assistant for CLI failures.
-
 **v0.3 is non-interactive and deterministic.**
-It never rewrites tool output. It only adds an `ASSIST` block.
-
+It never rewrites tool output. It only adds an ASSIST block.
+## Why
+When a CLI tool fails, the error message is usually written for the developer who built it, not for the person trying to recover from it. If you use a screen reader, have low vision, or are under cognitive load, a wall of stack traces and abbreviated codes is not help -- it is another obstacle.
+**a11y-assist** adds a structured recovery block to any CLI failure:
+- Anchors suggestions to the original error ID (when available)
+- Produces numbered, profile-adapted recovery plans
+- Only suggests SAFE commands (read-only, dry-run, status checks)
+- Discloses confidence level so the user knows how much to trust the suggestion
+- Never rewrites or hides the original tool output
+Five accessibility profiles ship out of the box: low vision, cognitive load, screen reader, dyslexia, and plain language.
 ## Install
 
 ```bash
