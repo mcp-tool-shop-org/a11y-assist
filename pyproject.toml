@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "a11y-assist"
-version = "0.4.1"
+version = "0.4.2"
 description = "Low-vision-first assistant for CLI failures (additive, deterministic)."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -58,3 +58,10 @@ line-length = 100
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["a11y_assist*"]
+
+[tool.setuptools.package-data]
+"a11y_assist" = ["schemas/*.json"]
