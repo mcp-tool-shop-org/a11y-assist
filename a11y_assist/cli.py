@@ -502,7 +502,7 @@ def assist_run():
 )
 @click.option(
     "--fail-on",
-    type=click.Choice(["error", "warning", "never"]),
+    type=click.Choice(["error", "warning", "none"]),
     default="error",
     help="Exit nonzero if findings exist at/above this severity (default: error).",
 )
@@ -579,7 +579,7 @@ def ingest_cmd(
         click.echo(f"\nOutput: {out}")
 
     # Determine exit code based on --fail-on
-    if fail_on == "never":
+    if fail_on == "none":
         raise SystemExit(0)
 
     errors = result.summary.get("errors", 0)
