@@ -1,3 +1,16 @@
+# a11y-assist v0.4.1
+
+Eighth release of **a11y-assist** — comprehensive README overhaul.
+
+## Changed
+
+- README rewritten: added CI badge, Python version badge, Quick Start section, profile comparison table, all five profile output examples, JSON response schema example, architecture diagram, ingest command docs, expanded safety/guard documentation
+- Fixed dead link to non-existent METHODS_CATALOG.md
+- Updated version references from v0.3 to v0.4
+- Version bump to 0.4.1
+
+---
+
 # a11y-assist v0.4.0
 
 Seventh release of **a11y-assist** — fixes a broken import that blocked CI since v0.3.0, cleans 18 lint errors, and hardens CI.

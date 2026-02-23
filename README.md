@@ -8,27 +8,63 @@
 </p>
 <p align="center">
   <a href="https://pypi.org/project/a11y-assist/"><img src="https://img.shields.io/pypi/v/a11y-assist?color=blue" alt="PyPI version" /></a>
-  <img src="https://img.shields.io/badge/assist-low--vision--first-blue" alt="assist" />
+  <a href="https://github.com/mcp-tool-shop-org/a11y-assist/actions"><img src="https://github.com/mcp-tool-shop-org/a11y-assist/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python versions" />
   <img src="https://img.shields.io/badge/commands-SAFE--only-green" alt="safe" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
 </p>
+
 ---
-**v0.3 is non-interactive and deterministic.**
+
+**v0.4 is non-interactive and deterministic.**
 It never rewrites tool output. It only adds an ASSIST block.
+
 ## Why
+
 When a CLI tool fails, the error message is usually written for the developer who built it, not for the person trying to recover from it. If you use a screen reader, have low vision, or are under cognitive load, a wall of stack traces and abbreviated codes is not help -- it is another obstacle.
+
 **a11y-assist** adds a structured recovery block to any CLI failure:
+
 - Anchors suggestions to the original error ID (when available)
 - Produces numbered, profile-adapted recovery plans
 - Only suggests SAFE commands (read-only, dry-run, status checks)
 - Discloses confidence level so the user knows how much to trust the suggestion
 - Never rewrites or hides the original tool output
+
 Five accessibility profiles ship out of the box: low vision, cognitive load, screen reader, dyslexia, and plain language.
+
 ## Install
 
 ```bash
 pip install a11y-assist
 ```
+
+Requires Python 3.11 or later.
+
+## Quick Start
+
+```bash
+# 1. Wrap any command — a11y-assist captures its output
+assist-run some-tool do-thing
+
+# 2. If it fails, get accessible recovery guidance
+a11y-assist last
+
+# 3. Switch profiles to match your needs
+a11y-assist last --profile cognitive-load
+```
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `a11y-assist explain --json <path>` | High-confidence assist from `cli.error.v0.1` JSON |
+| `a11y-assist triage --stdin` | Best-effort assist from raw CLI text |
+| `a11y-assist last` | Assist from the last captured log (`~/.a11y-assist/last.log`) |
+| `a11y-assist ingest <findings.json>` | Import findings from a11y-evidence-engine |
+| `assist-run <cmd> [args...]` | Wrapper that captures output for `last` |
+
+All commands accept `--profile`, `--json-response`, and `--json-out` flags.
 
 ## Usage
 
@@ -38,11 +74,15 @@ pip install a11y-assist
 a11y-assist explain --json message.json
 ```
 
+When a tool emits `cli.error.v0.1` JSON, the assist is high-confidence: the error ID is anchored, the plan comes directly from Fix steps, and SAFE commands are extracted verbatim.
+
 ### Triage raw CLI output (fallback)
 
 ```bash
 some-tool do-thing 2>&1 | a11y-assist triage --stdin
 ```
+
+For tools that don't emit structured JSON, triage parses raw text heuristically. Confidence is lower but still useful.
 
 ### Wrapper mode (best UX without tool changes)
 
@@ -52,35 +92,31 @@ assist-run some-tool do-thing
 a11y-assist last
 ```
 
-### Accessibility profiles
+`assist-run` captures stdout and stderr to `~/.a11y-assist/last.log`, then `last` processes it. No changes to the wrapped tool required.
 
-Use `--profile` to select output format:
+### Ingest evidence-engine findings
 
 ```bash
-# Default: low-vision profile (numbered steps, max 5)
-a11y-assist explain --json message.json --profile lowvision
-
-# Cognitive-load profile (reduced, max 3 steps, First/Next/Last labels)
-a11y-assist explain --json message.json --profile cognitive-load
-
-# Screen-reader profile (TTS-optimized, expanded abbreviations)
-a11y-assist explain --json message.json --profile screen-reader
-
-# Dyslexia profile (reduced reading friction, explicit labels)
-a11y-assist explain --json message.json --profile dyslexia
-
-# Plain-language profile (maximum clarity, one clause per sentence)
-a11y-assist explain --json message.json --profile plain-language
+a11y-assist ingest findings.json --verify-provenance --strict
 ```
 
-Available profiles:
-- **lowvision** (default): Clear labels, numbered steps, SAFE commands
-- **cognitive-load**: Reduced cognitive load for ADHD, autism, anxiety, or stress
-- **screen-reader**: TTS-optimized for screen readers, braille displays, listen-first workflows
-- **dyslexia**: Reduced reading friction, explicit labels, no symbolic emphasis
-- **plain-language**: Maximum clarity, one clause per sentence, simplified structure
+Imports findings from [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine), producing `ingest-summary.json` and `advisories.json` with fix-oriented tasks and evidence links.
 
-## Output Format
+## Accessibility Profiles
+
+Use `--profile` to select output adapted to your needs:
+
+```bash
+a11y-assist explain --json message.json --profile screen-reader
+```
+
+| Profile | Primary benefit | Max steps | Key adaptations |
+|---------|-----------------|-----------|-----------------|
+| **lowvision** (default) | Visual clarity | 5 | Clear labels, numbered steps, SAFE commands |
+| **cognitive-load** | Reduced mental steps | 3 | Goal line, First/Next/Last labels, shorter sentences |
+| **screen-reader** | Audio-first | 3-5 | TTS-friendly, abbreviations expanded, no visual refs |
+| **dyslexia** | Reduced reading friction | 5 | Explicit labels, no symbolic emphasis, extra spacing |
+| **plain-language** | Maximum clarity | 4 | One clause per sentence, simplified structure |
 
 ### Low Vision Profile (default)
 
@@ -106,8 +142,6 @@ Notes:
 
 ### Cognitive Load Profile
 
-Designed for users who benefit from reduced cognitive load (ADHD, autism, anxiety, stress):
-
 ```
 ASSIST (Cognitive Load):
 - Anchored to: PAY.EXPORT.SFTP.AUTH
@@ -127,17 +161,7 @@ Next (SAFE):
   payroll export --batch 2026-01-26 --dry-run
 ```
 
-Key differences:
-- Fixed "Goal" line for orientation
-- Max 3 plan steps (vs 5)
-- First/Next/Last labels (vs numbers)
-- One SAFE command max (vs 3)
-- Shorter, simpler sentences
-- No parentheticals or verbose explanations
-
 ### Screen Reader Profile
-
-Designed for users consuming output via screen readers, TTS, or braille displays:
 
 ```
 ASSIST. Profile: Screen reader.
@@ -157,52 +181,71 @@ Next safe command:
 payroll export --batch 2026-01-26 --dry-run
 ```
 
-Key differences:
-- Spoken-friendly headers (periods instead of colons)
-- "Step N:" labels for predictable listening
-- Abbreviations expanded (CLI → command line, ID → I D, JSON → J S O N)
-- No visual navigation references (above, below, arrow)
-- No parentheticals (screen readers read them awkwardly)
-- Low confidence reduces to 3 steps (less listening time)
+### Dyslexia Profile
+
+```
+ASSIST (Dyslexia-Friendly):
+
+Anchored to: PAY.EXPORT.SFTP.AUTH
+
+Confidence: High
+
+Safest next step:
+  Verify credentials.
+
+Plan:
+  Step 1: Verify credentials.
+  Step 2: Re-run with dry-run flag.
+
+Try this safe command:
+  payroll export --batch 2026-01-26 --dry-run
+```
+
+### Plain Language Profile
+
+```
+ASSIST (Plain Language):
+
+Anchored to: PAY.EXPORT.SFTP.AUTH
+
+Confidence: High
+
+Safest next step:
+  Verify credentials.
+
+Plan:
+  1. Verify credentials.
+  2. Re-run with dry-run flag.
+
+Try this safe command:
+  payroll export --batch 2026-01-26 --dry-run
+```
 
 ## Confidence Levels
 
-| Level | Meaning |
-|-------|---------|
-| High | Validated `cli.error.v0.1` JSON with ID |
-| Medium | Raw text with detectable `(ID: ...)` |
-| Low | Best-effort parse, no ID found |
+| Level | Meaning | When |
+|-------|---------|------|
+| **High** | Validated `cli.error.v0.1` JSON with ID | Tool emits structured error output |
+| **Medium** | Raw text with detectable `(ID: ...)` | Error ID found in unstructured text |
+| **Low** | Best-effort parse, no ID found | No anchor; suggestions are heuristic |
 
-## Safety
+Confidence is always disclosed in the output. It never increases during profile transformation.
 
-- **SAFE-only** suggested commands in v0.1
-- Never invents error IDs
-- Confidence is disclosed (High/Medium/Low)
-- No network calls
-- Never rewrites original output
+## Safety Guarantees
 
-## Commands
+a11y-assist enforces strict safety invariants at runtime through its Profile Guard system:
 
-| Command | Description |
-|---------|-------------|
-| `a11y-assist explain --json <path>` | High-confidence assist from cli.error.v0.1 |
-| `a11y-assist triage --stdin` | Best-effort assist from raw text |
-| `a11y-assist last` | Assist from `~/.a11y-assist/last.log` |
-| `assist-run <cmd> [args...]` | Wrapper that captures output for `last` |
+- **SAFE-only commands** — only read-only, dry-run, and status-check commands are suggested
+- **No invented IDs** — error IDs come from the input or are absent; never fabricated
+- **No invented content** — profiles rephrase but never add new factual claims
+- **Confidence disclosed** — always shown; can decrease but never increase
+- **Additive only** — original tool output is never modified, hidden, or suppressed
+- **Deterministic** — same input always produces the same output; no network calls, no randomness
+- **Guard-checked** — every profile transform is validated against invariants before rendering
 
-## Integration with a11y-lint
+Guard violations produce structured error output with machine-readable codes (e.g., `A11Y.ASSIST.GUARD.COMMANDS.INVENTED`).
 
-Tools that emit `cli.error.v0.1` JSON get high-confidence assistance:
-
-```bash
-# Tool emits structured error
-my-tool --json 2> error.json
-
-# Get high-confidence assist
-a11y-assist explain --json error.json
-```
-
-## Integration (CI / Pipelines)
+## JSON Output (CI / Pipelines)
 
 For automation, use `--json-response` to get machine-readable output:
 
@@ -214,15 +257,61 @@ a11y-assist explain --json error.json --json-response
 a11y-assist explain --json error.json --json-out assist.json
 ```
 
-The JSON output follows `assist.response.v0.1` schema and includes:
-- `confidence`: High | Medium | Low
-- `safest_next_step`: One-sentence recommendation
-- `plan`: Ordered list of steps
-- `next_safe_commands`: SAFE-only commands (if any)
-- `methods_applied`: Audit trail of engine methods used
-- `evidence`: Source anchors mapping output to input
+The JSON output follows the `assist.response.v0.1` schema:
 
-See [METHODS_CATALOG.md](METHODS_CATALOG.md) for the full list of method IDs.
+```json
+{
+  "schema": "assist.response.v0.1",
+  "anchored_id": "PAY.EXPORT.SFTP.AUTH",
+  "confidence": "High",
+  "safest_next_step": "Start by confirming the cause...",
+  "plan": ["Verify credentials.", "Re-run with --dry-run"],
+  "next_safe_commands": ["payroll export --batch 2026-01-26 --dry-run"],
+  "notes": ["Original title: Payment export failed"],
+  "methods_applied": ["engine.normalize.from_cli_error_v0_1", "profile.lowvision.apply"],
+  "evidence": [{"field": "plan[0]", "source": "cli.error.fix[0]"}]
+}
+```
+
+## Integration with cli.error.v0.1
+
+Tools that emit `cli.error.v0.1` JSON get high-confidence assistance:
+
+```bash
+# Tool emits structured error
+my-tool --json 2> error.json
+
+# Get high-confidence assist
+a11y-assist explain --json error.json
+```
+
+Adopting `cli.error.v0.1` in your tool means every user gets anchored recovery plans, regardless of their accessibility needs.
+
+## Architecture
+
+```
+Input (JSON / raw text / last.log)
+  │
+  ├─ from_cli_error.py    ← validates cli.error.v0.1
+  ├─ parse_raw.py         ← heuristic ID + block extraction
+  │
+  ▼
+AssistResult (anchored_id, confidence, plan, safe_commands, evidence)
+  │
+  ├─ profiles/            ← lowvision, cognitive-load, screen-reader, dyslexia, plain-language
+  │
+  ▼
+Profile Transform (rephrase, reduce, adapt)
+  │
+  ├─ guard.py             ← runtime invariant checker
+  │
+  ▼
+Rendered Output (text or JSON)
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
