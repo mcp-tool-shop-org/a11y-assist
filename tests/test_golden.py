@@ -124,4 +124,4 @@ class TestGoldenDeterminism:
                 rendered = renderer(transformed)
                 outputs.append(rendered)
 
-            assert len(set(outputs)) == 1, f"Profile must be deterministic"
+            assert len(set(outputs)) == 1, "Profile must be deterministic"

@@ -11,8 +11,6 @@ These tests enforce the invariants:
 8. No parentheticals as meaning carriers
 """
 
-import pytest
-
 from a11y_assist.profiles.screen_reader import (
     MAX_NOTE_LENGTH,
     MAX_STEP_LENGTH,
@@ -27,7 +25,6 @@ from a11y_assist.profiles.screen_reader import (
     _strip_boilerplate,
     apply_screen_reader,
     generate_summary,
-    normalize_safest_step,
     normalize_step,
     reduce_notes,
     reduce_plan,
@@ -159,7 +156,9 @@ class TestAudioSpecificConstraints:
 
         assert "see above" not in output
         assert "see below" not in output
-        assert "above" not in output or "above" in output.split("step")[-1]  # Allow in step numbers context
+        assert (
+            "above" not in output or "above" in output.split("step")[-1]
+        )  # Allow in step numbers context
         assert "below" not in output
         assert "left" not in output
         assert "right" not in output
@@ -606,9 +605,7 @@ class TestGoldenOutput:
         from a11y_assist.from_cli_error import assist_from_cli_error, load_cli_error
         import os
 
-        fixture_path = os.path.join(
-            os.path.dirname(__file__), "fixtures", "cli_error_good.json"
-        )
+        fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "cli_error_good.json")
         obj = load_cli_error(fixture_path)
         result = assist_from_cli_error(obj)
         transformed = apply_screen_reader(result)
@@ -631,9 +628,7 @@ class TestGoldenOutput:
         from a11y_assist.parse_raw import parse_raw
         import os
 
-        fixture_path = os.path.join(
-            os.path.dirname(__file__), "fixtures", "raw_good.txt"
-        )
+        fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "raw_good.txt")
         with open(fixture_path) as f:
             text = f.read()
 
@@ -664,9 +659,7 @@ class TestGoldenOutput:
         from a11y_assist.parse_raw import parse_raw
         import os
 
-        fixture_path = os.path.join(
-            os.path.dirname(__file__), "fixtures", "raw_no_id.txt"
-        )
+        fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "raw_no_id.txt")
         with open(fixture_path) as f:
             text = f.read()
 

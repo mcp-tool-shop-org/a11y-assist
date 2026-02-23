@@ -25,10 +25,9 @@ from a11y_assist.methods import (
 )
 from a11y_assist.profiles import (
     apply_cognitive_load,
-    apply_screen_reader,
     render_cognitive_load,
 )
-from a11y_assist.render import AssistResult, Evidence, render_assist
+from a11y_assist.render import AssistResult, render_assist
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -70,9 +69,7 @@ class TestCliErrorMetadata:
     def test_evidence_for_safe_commands(self, result):
         """Evidence should include safe command sources."""
         if result.next_safe_commands:
-            cmd_evidence = [
-                e for e in result.evidence if e.field.startswith("next_safe_commands[")
-            ]
+            cmd_evidence = [e for e in result.evidence if e.field.startswith("next_safe_commands[")]
             assert len(cmd_evidence) == len(result.next_safe_commands)
 
 

@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 from importlib import resources
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
 
 from jsonschema import Draft202012Validator
 
@@ -70,7 +70,6 @@ def assist_from_cli_error(obj: Dict[str, Any]) -> AssistResult:
         title = title[0] if title else "Issue"
 
     # Normalize to lists
-    what = _normalize_to_list(obj.get("what"))
     why = _normalize_to_list(obj.get("why"))
     fix = _normalize_to_list(obj.get("fix"))
 
@@ -86,8 +85,7 @@ def assist_from_cli_error(obj: Dict[str, Any]) -> AssistResult:
     safest_next = "Follow the Fix steps in order, starting with the least risky check."
     if why and isinstance(why[0], str) and why[0].strip():
         safest_next = (
-            "Start by confirming the cause described under 'Why', "
-            "then apply the first Fix step."
+            "Start by confirming the cause described under 'Why', then apply the first Fix step."
         )
 
     # SAFE commands: only include clearly non-destructive suggestions from fix text.
@@ -103,9 +101,7 @@ def assist_from_cli_error(obj: Dict[str, Any]) -> AssistResult:
                 next_cmds.append(line.split(":", 1)[1].strip())
 
     # Filter to SAFE-only heuristically
-    safe_filtered = [
-        c for c in next_cmds if "--dry-run" in c or "validate" in c or "check" in c
-    ]
+    safe_filtered = [c for c in next_cmds if "--dry-run" in c or "validate" in c or "check" in c]
     safe_filtered = list(dict.fromkeys(safe_filtered))  # dedupe preserving order
 
     notes = [

@@ -23,35 +23,164 @@ from .render import AssistResult, Confidence
 Severity = Literal["ERROR", "WARN"]
 
 # Stopwords to ignore in content overlap checking
-STOPWORDS = frozenset([
-    "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
-    "have", "has", "had", "do", "does", "did", "will", "would", "could",
-    "should", "may", "might", "must", "shall", "can", "to", "of", "in",
-    "for", "on", "with", "at", "by", "from", "as", "into", "through",
-    "during", "before", "after", "above", "below", "between", "under",
-    "again", "further", "then", "once", "here", "there", "when", "where",
-    "why", "how", "all", "each", "few", "more", "most", "other", "some",
-    "such", "no", "nor", "not", "only", "own", "same", "so", "than",
-    "too", "very", "just", "also", "now", "and", "but", "or", "if", "it",
-    "its", "this", "that", "these", "those", "what", "which", "who",
-    "whom", "your", "you", "we", "they", "them", "their", "our", "my",
-])
+STOPWORDS = frozenset(
+    [
+        "a",
+        "an",
+        "the",
+        "is",
+        "are",
+        "was",
+        "were",
+        "be",
+        "been",
+        "being",
+        "have",
+        "has",
+        "had",
+        "do",
+        "does",
+        "did",
+        "will",
+        "would",
+        "could",
+        "should",
+        "may",
+        "might",
+        "must",
+        "shall",
+        "can",
+        "to",
+        "of",
+        "in",
+        "for",
+        "on",
+        "with",
+        "at",
+        "by",
+        "from",
+        "as",
+        "into",
+        "through",
+        "during",
+        "before",
+        "after",
+        "above",
+        "below",
+        "between",
+        "under",
+        "again",
+        "further",
+        "then",
+        "once",
+        "here",
+        "there",
+        "when",
+        "where",
+        "why",
+        "how",
+        "all",
+        "each",
+        "few",
+        "more",
+        "most",
+        "other",
+        "some",
+        "such",
+        "no",
+        "nor",
+        "not",
+        "only",
+        "own",
+        "same",
+        "so",
+        "than",
+        "too",
+        "very",
+        "just",
+        "also",
+        "now",
+        "and",
+        "but",
+        "or",
+        "if",
+        "it",
+        "its",
+        "this",
+        "that",
+        "these",
+        "those",
+        "what",
+        "which",
+        "who",
+        "whom",
+        "your",
+        "you",
+        "we",
+        "they",
+        "them",
+        "their",
+        "our",
+        "my",
+    ]
+)
 
 # Allowed glue vocabulary for plan steps (common action words)
-GLUE_VOCABULARY = frozenset([
-    "step", "first", "next", "last", "run", "rerun", "re-run", "confirm",
-    "check", "verify", "try", "retry", "follow", "start", "continue",
-    "do", "ensure", "make", "see", "look", "update", "fix", "apply",
-    "tool", "tools", "command", "commands", "output", "input", "file",
-    "files", "error", "errors", "warning", "warnings", "dry", "dryrun",
-    "dry-run", "validate", "validation", "config", "configuration",
-    "line", "cli", "json", "order", "instructions", "steps",
-])
+GLUE_VOCABULARY = frozenset(
+    [
+        "step",
+        "first",
+        "next",
+        "last",
+        "run",
+        "rerun",
+        "re-run",
+        "confirm",
+        "check",
+        "verify",
+        "try",
+        "retry",
+        "follow",
+        "start",
+        "continue",
+        "do",
+        "ensure",
+        "make",
+        "see",
+        "look",
+        "update",
+        "fix",
+        "apply",
+        "tool",
+        "tools",
+        "command",
+        "commands",
+        "output",
+        "input",
+        "file",
+        "files",
+        "error",
+        "errors",
+        "warning",
+        "warnings",
+        "dry",
+        "dryrun",
+        "dry-run",
+        "validate",
+        "validation",
+        "config",
+        "configuration",
+        "line",
+        "cli",
+        "json",
+        "order",
+        "instructions",
+        "steps",
+    ]
+)
 
 # Visual navigation patterns
-VISUAL_NAV_PATTERNS = re.compile(
-    r"\b(see\s+)?(above|below|left|right|arrow)\b", re.IGNORECASE
-)
+VISUAL_NAV_PATTERNS = re.compile(r"\b(see\s+)?(above|below|left|right|arrow)\b", re.IGNORECASE)
 
 # Parenthetical pattern
 PARENTHETICAL_PATTERN = re.compile(r"[\(\)\[\]]")
@@ -113,10 +242,7 @@ def _tokenize_content(text: str) -> Set[str]:
     # Extract alphanumeric tokens
     tokens = re.findall(r"[a-zA-Z0-9]+", text.lower())
     # Filter
-    return {
-        t for t in tokens
-        if len(t) >= 3 and t not in STOPWORDS
-    }
+    return {t for t in tokens if len(t) >= 3 and t not in STOPWORDS}
 
 
 def _is_content_supported(line: str, base_tokens: Set[str]) -> bool:
@@ -153,26 +279,30 @@ def _check_id_invariant(
     """Check: Anchored ID cannot be invented or changed."""
     if base.anchored_id is None:
         if profiled.anchored_id is not None:
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.ID.INVENTED",
-                message="Profile invented an anchored ID that didn't exist in base",
-                details={
-                    "base_id": "None",
-                    "profiled_id": str(profiled.anchored_id),
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.ID.INVENTED",
+                    message="Profile invented an anchored ID that didn't exist in base",
+                    details={
+                        "base_id": "None",
+                        "profiled_id": str(profiled.anchored_id),
+                    },
+                )
+            )
     else:
         if profiled.anchored_id != base.anchored_id:
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.ID.CHANGED",
-                message="Profile changed the anchored ID",
-                details={
-                    "base_id": str(base.anchored_id),
-                    "profiled_id": str(profiled.anchored_id),
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.ID.CHANGED",
+                    message="Profile changed the anchored ID",
+                    details={
+                        "base_id": str(base.anchored_id),
+                        "profiled_id": str(profiled.anchored_id),
+                    },
+                )
+            )
 
 
 def _check_confidence_invariant(
@@ -183,15 +313,17 @@ def _check_confidence_invariant(
     profiled_level = CONFIDENCE_ORDER.get(profiled.confidence, 0)
 
     if profiled_level > base_level:
-        issues.append(GuardIssue(
-            severity="ERROR",
-            code="A11Y.ASSIST.GUARD.CONFIDENCE.INCREASED",
-            message="Profile increased confidence level (not allowed)",
-            details={
-                "base_confidence": base.confidence,
-                "profiled_confidence": profiled.confidence,
-            },
-        ))
+        issues.append(
+            GuardIssue(
+                severity="ERROR",
+                code="A11Y.ASSIST.GUARD.CONFIDENCE.INCREASED",
+                message="Profile increased confidence level (not allowed)",
+                details={
+                    "base_confidence": base.confidence,
+                    "profiled_confidence": profiled.confidence,
+                },
+            )
+        )
 
 
 def _check_commands_invariant(
@@ -215,27 +347,31 @@ def _check_commands_invariant(
                 break
 
         if not allowed:
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.COMMANDS.INVENTED",
-                message="Profile included a command not in the allowed set",
-                details={
-                    "command": cmd,
-                    "allowed_commands": ", ".join(ctx.allowed_safe_commands) or "(none)",
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.COMMANDS.INVENTED",
+                    message="Profile included a command not in the allowed set",
+                    details={
+                        "command": cmd,
+                        "allowed_commands": ", ".join(ctx.allowed_safe_commands) or "(none)",
+                    },
+                )
+            )
 
     # Check Low confidence rule
     if ctx.confidence == "Low" and not ctx.allow_commands_on_low:
         if profiled.next_safe_commands:
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.COMMANDS.DISALLOWED_LOW_CONF",
-                message="Profile included commands on Low confidence (not allowed)",
-                details={
-                    "commands": ", ".join(profiled.next_safe_commands),
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.COMMANDS.DISALLOWED_LOW_CONF",
+                    message="Profile included commands on Low confidence (not allowed)",
+                    details={
+                        "commands": ", ".join(profiled.next_safe_commands),
+                    },
+                )
+            )
 
 
 def _check_step_count_invariant(
@@ -244,15 +380,17 @@ def _check_step_count_invariant(
     """Check: Step count caps enforced."""
     if ctx.max_steps is not None:
         if len(profiled.plan) > ctx.max_steps:
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.PLAN.TOO_MANY_STEPS",
-                message=f"Profile exceeded max steps ({ctx.max_steps})",
-                details={
-                    "max_steps": str(ctx.max_steps),
-                    "actual_steps": str(len(profiled.plan)),
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.PLAN.TOO_MANY_STEPS",
+                    message=f"Profile exceeded max steps ({ctx.max_steps})",
+                    details={
+                        "max_steps": str(ctx.max_steps),
+                        "actual_steps": str(len(profiled.plan)),
+                    },
+                )
+            )
 
 
 def _check_content_support_invariant(
@@ -265,80 +403,76 @@ def _check_content_support_invariant(
 
     # Check safest_next_step
     if not _is_content_supported(profiled.safest_next_step, base_tokens):
-        issues.append(GuardIssue(
-            severity="WARN",
-            code="A11Y.ASSIST.GUARD.CONTENT.UNSUPPORTED",
-            message="Safest next step contains content not found in base text",
-            details={
-                "text": profiled.safest_next_step[:80],
-            },
-        ))
+        issues.append(
+            GuardIssue(
+                severity="WARN",
+                code="A11Y.ASSIST.GUARD.CONTENT.UNSUPPORTED",
+                message="Safest next step contains content not found in base text",
+                details={
+                    "text": profiled.safest_next_step[:80],
+                },
+            )
+        )
 
     # Check plan steps
     for i, step in enumerate(profiled.plan):
         if not _is_content_supported(step, base_tokens):
-            issues.append(GuardIssue(
-                severity="WARN",
-                code="A11Y.ASSIST.GUARD.CONTENT.UNSUPPORTED",
-                message=f"Plan step {i + 1} contains content not found in base text",
-                details={
-                    "step": step[:80],
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="WARN",
+                    code="A11Y.ASSIST.GUARD.CONTENT.UNSUPPORTED",
+                    message=f"Plan step {i + 1} contains content not found in base text",
+                    details={
+                        "step": step[:80],
+                    },
+                )
+            )
 
 
-def _check_parentheticals_constraint(
-    profiled: AssistResult, issues: List[GuardIssue]
-) -> None:
+def _check_parentheticals_constraint(profiled: AssistResult, issues: List[GuardIssue]) -> None:
     """Check: No parentheticals allowed (profile-specific)."""
     fields_to_check = [
         ("safest_next_step", profiled.safest_next_step),
     ]
-    fields_to_check.extend(
-        (f"plan[{i}]", step) for i, step in enumerate(profiled.plan)
-    )
-    fields_to_check.extend(
-        (f"notes[{i}]", note) for i, note in enumerate(profiled.notes)
-    )
+    fields_to_check.extend((f"plan[{i}]", step) for i, step in enumerate(profiled.plan))
+    fields_to_check.extend((f"notes[{i}]", note) for i, note in enumerate(profiled.notes))
 
     for field_name, text in fields_to_check:
         if PARENTHETICAL_PATTERN.search(text):
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.TEXT.PARENTHETICALS_FORBIDDEN",
-                message=f"Parentheticals found in {field_name} (forbidden by profile)",
-                details={
-                    "field": field_name,
-                    "text": text[:80],
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.TEXT.PARENTHETICALS_FORBIDDEN",
+                    message=f"Parentheticals found in {field_name} (forbidden by profile)",
+                    details={
+                        "field": field_name,
+                        "text": text[:80],
+                    },
+                )
+            )
 
 
-def _check_visual_refs_constraint(
-    profiled: AssistResult, issues: List[GuardIssue]
-) -> None:
+def _check_visual_refs_constraint(profiled: AssistResult, issues: List[GuardIssue]) -> None:
     """Check: No visual navigation references (profile-specific)."""
     fields_to_check = [
         ("safest_next_step", profiled.safest_next_step),
     ]
-    fields_to_check.extend(
-        (f"plan[{i}]", step) for i, step in enumerate(profiled.plan)
-    )
-    fields_to_check.extend(
-        (f"notes[{i}]", note) for i, note in enumerate(profiled.notes)
-    )
+    fields_to_check.extend((f"plan[{i}]", step) for i, step in enumerate(profiled.plan))
+    fields_to_check.extend((f"notes[{i}]", note) for i, note in enumerate(profiled.notes))
 
     for field_name, text in fields_to_check:
         if VISUAL_NAV_PATTERNS.search(text):
-            issues.append(GuardIssue(
-                severity="ERROR",
-                code="A11Y.ASSIST.GUARD.TEXT.VISUAL_REFS_FORBIDDEN",
-                message=f"Visual navigation reference found in {field_name} (forbidden by profile)",
-                details={
-                    "field": field_name,
-                    "text": text[:80],
-                },
-            ))
+            issues.append(
+                GuardIssue(
+                    severity="ERROR",
+                    code="A11Y.ASSIST.GUARD.TEXT.VISUAL_REFS_FORBIDDEN",
+                    message=f"Visual navigation reference found in {field_name} (forbidden by profile)",
+                    details={
+                        "field": field_name,
+                        "text": text[:80],
+                    },
+                )
+            )
 
 
 def validate_profile_transform(

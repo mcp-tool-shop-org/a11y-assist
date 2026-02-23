@@ -45,9 +45,7 @@ BOILERPLATE_PREFIXES = re.compile(
 PARENTHETICAL_RE = re.compile(r"\s*[\(\[][^\)\]]*[\)\]]\s*")
 
 # Visual navigation phrases to remove
-VISUAL_NAV_PHRASES = re.compile(
-    r"\b(see\s+)?(above|below|left|right|arrow)\b", re.IGNORECASE
-)
+VISUAL_NAV_PHRASES = re.compile(r"\b(see\s+)?(above|below|left|right|arrow)\b", re.IGNORECASE)
 
 # Abbreviation expansions (small, fixed set for determinism)
 ABBREVIATIONS = [
@@ -256,9 +254,7 @@ def reduce_plan(plan: List[str], confidence: Confidence) -> List[str]:
     return normalized[:max_steps]
 
 
-def select_safe_command(
-    commands: List[str], confidence: Confidence
-) -> Optional[str]:
+def select_safe_command(commands: List[str], confidence: Confidence) -> Optional[str]:
     """Select at most one SAFE command for screen-reader profile.
 
     Rules:

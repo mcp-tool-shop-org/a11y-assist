@@ -13,9 +13,8 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
-from dataclasses import replace
 from pathlib import Path
-from typing import Callable, List, Optional, Set, Tuple
+from typing import Callable, List, Optional, Set
 
 import click
 
@@ -78,6 +77,7 @@ def output_result(
             json.dumps(to_response_dict(result), indent=2),
             encoding="utf-8",
         )
+
 
 # Profile registry
 PROFILE_CHOICES = [
@@ -228,9 +228,7 @@ def explain_cmd(json_path: str, profile: str, json_response: bool, json_out: Opt
             base_text = f.read()
 
         try:
-            output = render_with_profile_guarded(
-                base_text, result, profile, "cli_error_json"
-            )
+            output = render_with_profile_guarded(base_text, result, profile, "cli_error_json")
             # Get the transformed result for JSON output
             transformed = apply_profile(result, profile)
             transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
@@ -255,9 +253,7 @@ def explain_cmd(json_path: str, profile: str, json_response: bool, json_out: Opt
         # For validation errors, base_text is the error message itself
         base_text = "; ".join(e.errors)
         try:
-            output = render_with_profile_guarded(
-                base_text, res, profile, "cli_error_json"
-            )
+            output = render_with_profile_guarded(base_text, res, profile, "cli_error_json")
             transformed = apply_profile(res, profile)
             transformed = with_method(transformed, METHOD_GUARD_VALIDATE)
             output_result(output, transformed, json_response, json_out)
@@ -325,7 +321,7 @@ def triage_cmd(use_stdin: bool, profile: str, json_response: bool, json_out: Opt
     if fix_lines:
         evidence.append(Evidence(field="safest_next_step", source="raw_text:Fix:1"))
         for i, _ in enumerate(plan):
-            evidence.append(Evidence(field=f"plan[{i}]", source=f"raw_text:Fix:{i+1}"))
+            evidence.append(Evidence(field=f"plan[{i}]", source=f"raw_text:Fix:{i + 1}"))
 
     safe_cmds = [line for line in plan if "--dry-run" in line][:3]
     for i, cmd in enumerate(safe_cmds):
@@ -333,7 +329,7 @@ def triage_cmd(use_stdin: bool, profile: str, json_response: bool, json_out: Opt
         for j, fix_line in enumerate(plan):
             if cmd == fix_line:
                 evidence.append(
-                    Evidence(field=f"next_safe_commands[{i}]", source=f"raw_text:Fix:{j+1}")
+                    Evidence(field=f"next_safe_commands[{i}]", source=f"raw_text:Fix:{j + 1}")
                 )
                 break
 
@@ -414,14 +410,14 @@ def last_cmd(profile: str, json_response: bool, json_out: Optional[str]):
     if fix_lines:
         evidence.append(Evidence(field="safest_next_step", source="raw_text:Fix:1"))
         for i, _ in enumerate(plan):
-            evidence.append(Evidence(field=f"plan[{i}]", source=f"raw_text:Fix:{i+1}"))
+            evidence.append(Evidence(field=f"plan[{i}]", source=f"raw_text:Fix:{i + 1}"))
 
     safe_cmds = [line for line in plan if "--dry-run" in line][:3]
     for i, cmd in enumerate(safe_cmds):
         for j, fix_line in enumerate(plan):
             if cmd == fix_line:
                 evidence.append(
-                    Evidence(field=f"next_safe_commands[{i}]", source=f"raw_text:Fix:{j+1}")
+                    Evidence(field=f"next_safe_commands[{i}]", source=f"raw_text:Fix:{j + 1}")
                 )
                 break
 
@@ -455,9 +451,7 @@ def assist_run():
         raise SystemExit(2)
 
     cmd = sys.argv[1:]
-    proc = subprocess.run(
-        cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
-    )
+    proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     output = proc.stdout or ""
 
     # Print original output unchanged

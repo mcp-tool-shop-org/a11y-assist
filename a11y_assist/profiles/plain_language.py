@@ -57,7 +57,7 @@ def _simplify_sentence(text: str) -> str:
     result = re.sub(r"\s+", " ", result).strip()
 
     # Ensure ends with period if it doesn't have punctuation
-    if result and not result[-1] in ".!?:":
+    if result and result[-1] not in ".!?:":
         result = result + "."
 
     return result

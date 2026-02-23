@@ -129,7 +129,6 @@ def test_apply_plain_language_simplifies_plan_steps(base_result: AssistResult):
     for step in result.plan:
         # Each step should be one clause (no conjunctions in middle)
         # Note: "and" at end is ok due to simplification
-        words = step.lower().split()
         if " and " in step.lower():
             # "and" should only appear if it's a remaining fragment
             pass

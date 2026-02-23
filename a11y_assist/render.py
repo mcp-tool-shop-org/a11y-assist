@@ -93,3 +93,34 @@ def render_assist(result: AssistResult) -> str:
             lines.append(f"  - {n}")
 
     return "\n".join(lines) + "\n"
+
+
+def to_response_dict(result: AssistResult) -> dict:
+    """Serialize an AssistResult to an assist.response.v0.1 dict.
+
+    Returns a plain dict suitable for ``json.dumps``.
+    """
+    d: dict = {
+        "schema": "assist.response.v0.1",
+        "anchored_id": result.anchored_id,
+        "confidence": result.confidence,
+        "safest_next_step": result.safest_next_step,
+        "plan": list(result.plan),
+        "next_safe_commands": list(result.next_safe_commands),
+        "notes": list(result.notes),
+    }
+
+    if result.methods_applied:
+        d["methods_applied"] = list(result.methods_applied)
+
+    if result.evidence:
+        d["evidence"] = [
+            {
+                "field": e.field,
+                "source": e.source,
+                **({"note": e.note} if e.note else {}),
+            }
+            for e in result.evidence
+        ]
+
+    return d

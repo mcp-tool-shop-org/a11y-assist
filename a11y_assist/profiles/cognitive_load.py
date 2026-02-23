@@ -22,9 +22,7 @@ from typing import List, Optional
 from ..render import AssistResult, Confidence
 
 # Boilerplate prefixes to strip
-BOILERPLATE_PREFIXES = re.compile(
-    r"^(re-?run:\s*|run:\s*|try:\s*|\$\s*|>\s*)", re.IGNORECASE
-)
+BOILERPLATE_PREFIXES = re.compile(r"^(re-?run:\s*|run:\s*|try:\s*|\$\s*|>\s*)", re.IGNORECASE)
 
 # Phrases to rewrite to imperative form
 IMPERATIVE_REWRITES = [
@@ -173,9 +171,7 @@ def reduce_plan(plan: List[str], max_steps: int = 3) -> List[str]:
     return normalized[:max_steps]
 
 
-def select_safe_command(
-    commands: List[str], confidence: Confidence
-) -> Optional[str]:
+def select_safe_command(commands: List[str], confidence: Confidence) -> Optional[str]:
     """Select at most one SAFE command for cognitive-load.
 
     Rules:

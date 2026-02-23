@@ -1,9 +1,7 @@
 """Tests for storage (last.log)."""
 
-import os
 from pathlib import Path
 
-import pytest
 
 from a11y_assist.storage import (
     default_state_dir,

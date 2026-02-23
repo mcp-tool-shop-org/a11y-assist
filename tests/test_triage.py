@@ -2,7 +2,6 @@
 
 from pathlib import Path
 
-import pytest
 
 from a11y_assist.parse_raw import extract_id, parse_raw, extract_blocks
 

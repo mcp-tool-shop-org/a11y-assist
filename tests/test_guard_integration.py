@@ -6,7 +6,6 @@ the actual CLI commands with all three profiles.
 
 import json
 import tempfile
-from pathlib import Path
 
 import pytest
 from click.testing import CliRunner
@@ -41,9 +40,7 @@ def valid_cli_error_json() -> dict:
 @pytest.fixture
 def json_file(valid_cli_error_json: dict) -> str:
     """Create a temporary JSON file with valid cli.error.v0.1 content."""
-    with tempfile.NamedTemporaryFile(
-        mode="w", suffix=".json", delete=False
-    ) as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         json.dump(valid_cli_error_json, f)
         return f.name
 
@@ -93,9 +90,7 @@ Fix:
   Check line 42 for typos.
   Run: tool validate --dry-run
 """
-    result = runner.invoke(
-        main, ["triage", "--stdin", "--profile", "lowvision"], input=input_text
-    )
+    result = runner.invoke(main, ["triage", "--stdin", "--profile", "lowvision"], input=input_text)
 
     # Should succeed
     assert result.exit_code == 0
@@ -147,9 +142,7 @@ def test_triage_low_confidence_lowvision(runner: CliRunner):
     input_text = """Error: Something went wrong.
 Please check the configuration and try again.
 """
-    result = runner.invoke(
-        main, ["triage", "--stdin", "--profile", "lowvision"], input=input_text
-    )
+    result = runner.invoke(main, ["triage", "--stdin", "--profile", "lowvision"], input=input_text)
 
     # Should succeed with Low confidence
     assert result.exit_code == 0

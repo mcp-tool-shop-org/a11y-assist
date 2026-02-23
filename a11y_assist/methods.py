@@ -105,10 +105,7 @@ def evidence_for_plan(
     Returns:
         List of Evidence objects mapping plan[i] to source[i]
     """
-    return [
-        Evidence(field=f"plan[{i}]", source=f"{source_prefix}[{i}]")
-        for i in range(len(plan))
-    ]
+    return [Evidence(field=f"plan[{i}]", source=f"{source_prefix}[{i}]") for i in range(len(plan))]
 
 
 def evidence_for_commands(

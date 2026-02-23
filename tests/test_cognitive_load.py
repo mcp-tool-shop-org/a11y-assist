@@ -8,8 +8,6 @@ These tests enforce the invariants:
 5. Deterministic - no randomness, no network calls
 """
 
-import pytest
-
 from a11y_assist.profiles.cognitive_load import (
     MAX_STEP_LENGTH,
     _cap_length,

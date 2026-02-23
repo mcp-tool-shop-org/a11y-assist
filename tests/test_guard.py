@@ -6,7 +6,6 @@ Tests each guard check individually to ensure violations are detected.
 import pytest
 
 from a11y_assist.guard import (
-    GuardContext,
     GuardIssue,
     GuardViolation,
     get_guard_context,
@@ -16,6 +15,7 @@ from a11y_assist.render import AssistResult
 
 
 # Fixtures
+
 
 @pytest.fixture
 def base_result_high() -> AssistResult:
@@ -74,10 +74,7 @@ def test_guard_id_invented_fails(base_result_low: AssistResult, base_text: str):
     with pytest.raises(GuardViolation) as exc_info:
         validate_profile_transform(base_text, base_result_low, profiled, ctx)
 
-    assert any(
-        issue.code == "A11Y.ASSIST.GUARD.ID.INVENTED"
-        for issue in exc_info.value.issues
-    )
+    assert any(issue.code == "A11Y.ASSIST.GUARD.ID.INVENTED" for issue in exc_info.value.issues)
 
 
 def test_guard_id_changed_fails(base_result_high: AssistResult, base_text: str):
@@ -101,10 +98,7 @@ def test_guard_id_changed_fails(base_result_high: AssistResult, base_text: str):
     with pytest.raises(GuardViolation) as exc_info:
         validate_profile_transform(base_text, base_result_high, profiled, ctx)
 
-    assert any(
-        issue.code == "A11Y.ASSIST.GUARD.ID.CHANGED"
-        for issue in exc_info.value.issues
-    )
+    assert any(issue.code == "A11Y.ASSIST.GUARD.ID.CHANGED" for issue in exc_info.value.issues)
 
 
 def test_guard_id_preserved_passes(base_result_high: AssistResult, base_text: str):
@@ -154,8 +148,7 @@ def test_guard_confidence_increase_fails(base_result_low: AssistResult, base_tex
         validate_profile_transform(base_text, base_result_low, profiled, ctx)
 
     assert any(
-        issue.code == "A11Y.ASSIST.GUARD.CONFIDENCE.INCREASED"
-        for issue in exc_info.value.issues
+        issue.code == "A11Y.ASSIST.GUARD.CONFIDENCE.INCREASED" for issue in exc_info.value.issues
     )
 
 
@@ -228,8 +221,7 @@ def test_guard_command_invented_fails(base_result_high: AssistResult, base_text:
         validate_profile_transform(base_text, base_result_high, profiled, ctx)
 
     assert any(
-        issue.code == "A11Y.ASSIST.GUARD.COMMANDS.INVENTED"
-        for issue in exc_info.value.issues
+        issue.code == "A11Y.ASSIST.GUARD.COMMANDS.INVENTED" for issue in exc_info.value.issues
     )
 
 
@@ -255,8 +247,7 @@ def test_guard_command_not_in_allowed_set_fails(base_result_high: AssistResult, 
         validate_profile_transform(base_text, base_result_high, profiled, ctx)
 
     assert any(
-        issue.code == "A11Y.ASSIST.GUARD.COMMANDS.INVENTED"
-        for issue in exc_info.value.issues
+        issue.code == "A11Y.ASSIST.GUARD.COMMANDS.INVENTED" for issue in exc_info.value.issues
     )
 
 
@@ -344,8 +335,7 @@ def test_guard_plan_too_many_steps_fails():
         validate_profile_transform("test content", base, profiled, ctx)
 
     assert any(
-        issue.code == "A11Y.ASSIST.GUARD.PLAN.TOO_MANY_STEPS"
-        for issue in exc_info.value.issues
+        issue.code == "A11Y.ASSIST.GUARD.PLAN.TOO_MANY_STEPS" for issue in exc_info.value.issues
     )
 
 
@@ -380,8 +370,7 @@ def test_guard_cognitive_load_max_3_steps():
         validate_profile_transform("test content", base, profiled, ctx)
 
     assert any(
-        issue.code == "A11Y.ASSIST.GUARD.PLAN.TOO_MANY_STEPS"
-        for issue in exc_info.value.issues
+        issue.code == "A11Y.ASSIST.GUARD.PLAN.TOO_MANY_STEPS" for issue in exc_info.value.issues
     )
 
 

@@ -1,3 +1,27 @@
+# a11y-assist v0.4.0
+
+Seventh release of **a11y-assist** — fixes a broken import that blocked CI since v0.3.0, cleans 18 lint errors, and hardens CI.
+
+## Fixed
+
+- **`to_response_dict` missing from `render.py`** — `cli.py` imported this function but it was never implemented, causing `ImportError` on every test collection since v0.3.0. Now implemented as a proper `assist.response.v0.1` serializer.
+- **18 ruff lint errors** — removed unused imports, unused variables, fixed `not in` membership test, removed f-string without placeholders.
+
+## Changed
+
+- CI workflow replaced: `test.yml` → `ci.yml` with lint, test (3.11 + 3.12), and build jobs
+- CI now uses `paths:` filters, `concurrency:` groups, and `workflow_dispatch`
+- Dropped Python 3.10 from CI matrix (3.11 + 3.12)
+- Codebase reformatted with `ruff format`
+- Version bump to 0.4.0
+
+## Added
+
+- `to_response_dict()` in `render.py` — serializes `AssistResult` to `assist.response.v0.1` JSON dict with schema tag, methods, and evidence
+- `ruff format --check` added to CI lint step
+
+---
+
 # a11y-assist v0.3.1
 
 Sixth stable release of **a11y-assist**, adding audit metadata support for traceability.

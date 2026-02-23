@@ -76,9 +76,7 @@ def load_findings(findings_path: Path) -> Dict[str, Any]:
     return data
 
 
-def verify_provenance(
-    finding: Dict[str, Any], base_dir: Path
-) -> Tuple[bool, Optional[str]]:
+def verify_provenance(finding: Dict[str, Any], base_dir: Path) -> Tuple[bool, Optional[str]]:
     """Verify provenance for a single finding.
 
     Returns (success, error_message).
@@ -123,9 +121,7 @@ def verify_provenance(
         if not digest_outputs:
             return False, f"{finding.get('finding_id')}: No outputs in digest record"
 
-        expected_digest = (
-            digest_outputs[0].get("artifact.v0.1", {}).get("digest", {}).get("value")
-        )
+        expected_digest = digest_outputs[0].get("artifact.v0.1", {}).get("digest", {}).get("value")
         if not expected_digest:
             return False, f"{finding.get('finding_id')}: No digest value found"
 
@@ -212,9 +208,7 @@ def group_by_file(findings: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     # Build result sorted by errors desc, then file name
     result = [
         {"file": f, **counts}
-        for f, counts in sorted(
-            file_counts.items(), key=lambda x: (-x[1]["errors"], x[0])
-        )
+        for f, counts in sorted(file_counts.items(), key=lambda x: (-x[1]["errors"], x[0]))
     ]
 
     return result[:10]  # Top 10 files
@@ -287,9 +281,7 @@ def ingest(
     min_level = severity_order.get(min_severity, 0)
 
     filtered_findings = [
-        f
-        for f in data["findings"]
-        if severity_order.get(f.get("severity", "info"), 0) >= min_level
+        f for f in data["findings"] if severity_order.get(f.get("severity", "info"), 0) >= min_level
     ]
 
     # Verify provenance if requested
@@ -380,9 +372,7 @@ def render_text_summary(result: IngestResult) -> str:
     if result.by_rule:
         lines.append("By rule:")
         for rule in result.by_rule[:5]:
-            lines.append(
-                f"  {rule['rule_id']}: {rule['count']} ({rule['severity']})"
-            )
+            lines.append(f"  {rule['rule_id']}: {rule['count']} ({rule['severity']})")
         lines.append("")
 
     if result.top_files:
