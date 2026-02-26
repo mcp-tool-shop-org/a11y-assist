@@ -3,7 +3,9 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/a11y-assist/main/assets/logo-a11y-assist.png" alt="a11y-assist" width="400">
+  
+            <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/brand/main/logos/a11y-assist/readme.png"
+           alt="a11y-assist" width="400">
 </p>
 
 <p align="center">
