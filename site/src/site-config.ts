@@ -14,7 +14,7 @@ export const config: SiteConfig = {
     headlineAccent: 'recovery plans for everyone.',
     description: 'Deterministic accessibility assistance for CLI failures. Five profiles, SAFE-only commands, anchored error IDs, and disclosed confidence \u2014 never rewrites tool output, only adds a structured ASSIST block.',
     primaryCta: { href: '#quick-start', label: 'Get started' },
-    secondaryCta: { href: '#features', label: 'Learn more' },
+    secondaryCta: { href: 'handbook/', label: 'Read the Handbook' },
     previews: [
       { label: 'Install', code: 'pip install a11y-assist' },
       { label: 'Wrap', code: 'assist-run some-tool do-thing' },
