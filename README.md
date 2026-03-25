@@ -72,9 +72,10 @@ a11y-assist last --profile cognitive-load
 | `a11y-assist triage --stdin` | Best-effort assist from raw CLI text |
 | `a11y-assist last` | Assist from the last captured log (`~/.a11y-assist/last.log`) |
 | `a11y-assist ingest <findings.json>` | Import findings from a11y-evidence-engine |
+| `a11y-assist diagnose` | Check environment health: Python, deps, schemas, state |
 | `assist-run <cmd> [args...]` | Wrapper that captures output for `last` |
 
-All commands accept `--profile`, `--json-response`, and `--json-out` flags.
+All assist commands accept `--profile`, `--json-response`, and `--json-out` flags. The `diagnose` command accepts `--json-response`.
 
 ---
 
