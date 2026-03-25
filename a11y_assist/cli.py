@@ -187,7 +187,7 @@ def _handle_guard_violation(e: GuardViolation) -> None:
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
 @click.version_option(__version__)
 def main():
-    """a11y-assist: low-vision-first assistant for CLI failures (v0.1 non-interactive)."""
+    """a11y-assist: low-vision-first assistant for CLI failures (deterministic, non-interactive)."""
     pass
 
 

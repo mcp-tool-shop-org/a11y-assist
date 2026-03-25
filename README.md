@@ -45,7 +45,7 @@ Five accessibility profiles ship out of the box: low vision, cognitive load, scr
 pip install a11y-assist
 ```
 
-Requires Python 3.11 or later.
+Requires Python 3.10 or later.
 
 ---
 
