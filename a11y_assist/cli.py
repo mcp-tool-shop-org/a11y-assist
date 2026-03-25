@@ -483,12 +483,14 @@ def diagnose_cmd(json_response: bool):
     # 1. Python version
     py_ver = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
     py_ok = sys.version_info >= (3, 10)
-    checks.append({
-        "check": "python_version",
-        "status": "ok" if py_ok else "fail",
-        "value": py_ver,
-        "hint": None if py_ok else "a11y-assist requires Python 3.10+.",
-    })
+    checks.append(
+        {
+            "check": "python_version",
+            "status": "ok" if py_ok else "fail",
+            "value": py_ver,
+            "hint": None if py_ok else "a11y-assist requires Python 3.10+.",
+        }
+    )
     if not py_ok:
         all_ok = False
 
@@ -498,19 +500,23 @@ def diagnose_cmd(json_response: bool):
     for dep_name in ["click", "jsonschema"]:
         try:
             dep_ver = pkg_version(dep_name)
-            checks.append({
-                "check": f"dependency.{dep_name}",
-                "status": "ok",
-                "value": dep_ver,
-                "hint": None,
-            })
+            checks.append(
+                {
+                    "check": f"dependency.{dep_name}",
+                    "status": "ok",
+                    "value": dep_ver,
+                    "hint": None,
+                }
+            )
         except Exception:
-            checks.append({
-                "check": f"dependency.{dep_name}",
-                "status": "fail",
-                "value": "missing",
-                "hint": f"Install with: pip install {dep_name}",
-            })
+            checks.append(
+                {
+                    "check": f"dependency.{dep_name}",
+                    "status": "fail",
+                    "value": "missing",
+                    "hint": f"Install with: pip install {dep_name}",
+                }
+            )
             all_ok = False
 
     # 3. Schema files
@@ -518,57 +524,71 @@ def diagnose_cmd(json_response: bool):
         schema_dir = resources.files("a11y_assist.schemas")
         schema_file = schema_dir.joinpath("cli.error.schema.v0.1.json")
         schema_exists = schema_file.is_file() if hasattr(schema_file, "is_file") else True
-        checks.append({
-            "check": "schemas",
-            "status": "ok" if schema_exists else "fail",
-            "value": "cli.error.schema.v0.1.json found" if schema_exists else "missing",
-            "hint": None if schema_exists else "Reinstall a11y-assist: pip install --force-reinstall a11y-assist",
-        })
+        checks.append(
+            {
+                "check": "schemas",
+                "status": "ok" if schema_exists else "fail",
+                "value": "cli.error.schema.v0.1.json found" if schema_exists else "missing",
+                "hint": None
+                if schema_exists
+                else "Reinstall a11y-assist: pip install --force-reinstall a11y-assist",
+            }
+        )
         if not schema_exists:
             all_ok = False
     except Exception as e:
-        checks.append({
-            "check": "schemas",
-            "status": "fail",
-            "value": str(e),
-            "hint": "Reinstall a11y-assist: pip install --force-reinstall a11y-assist",
-        })
+        checks.append(
+            {
+                "check": "schemas",
+                "status": "fail",
+                "value": str(e),
+                "hint": "Reinstall a11y-assist: pip install --force-reinstall a11y-assist",
+            }
+        )
         all_ok = False
 
     # 4. State directory and last.log
     state_dir = default_state_dir()
     state_exists = state_dir.exists()
-    checks.append({
-        "check": "state_directory",
-        "status": "ok" if state_exists else "info",
-        "value": str(state_dir),
-        "hint": None if state_exists else "Created on first use of assist-run.",
-    })
+    checks.append(
+        {
+            "check": "state_directory",
+            "status": "ok" if state_exists else "info",
+            "value": str(state_dir),
+            "hint": None if state_exists else "Created on first use of assist-run.",
+        }
+    )
 
     log_path = last_log_path()
     if log_path.exists():
         log_size = log_path.stat().st_size
-        checks.append({
-            "check": "last_log",
-            "status": "ok",
-            "value": f"{log_size} bytes",
-            "hint": None,
-        })
+        checks.append(
+            {
+                "check": "last_log",
+                "status": "ok",
+                "value": f"{log_size} bytes",
+                "hint": None,
+            }
+        )
     else:
-        checks.append({
-            "check": "last_log",
-            "status": "info",
-            "value": "not found",
-            "hint": "Run assist-run <command> to create.",
-        })
+        checks.append(
+            {
+                "check": "last_log",
+                "status": "info",
+                "value": "not found",
+                "hint": "Run assist-run <command> to create.",
+            }
+        )
 
     # 5. Package version
-    checks.append({
-        "check": "package_version",
-        "status": "ok",
-        "value": __version__,
-        "hint": None,
-    })
+    checks.append(
+        {
+            "check": "package_version",
+            "status": "ok",
+            "value": __version__,
+            "hint": None,
+        }
+    )
 
     if json_response:
         click.echo(json.dumps({"ok": all_ok, "checks": checks}, indent=2))

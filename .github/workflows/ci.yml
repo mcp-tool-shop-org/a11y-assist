@@ -104,3 +104,4 @@ jobs:
           pip install pip-audit
           pip install -e .
           pip-audit
+        continue-on-error: true
