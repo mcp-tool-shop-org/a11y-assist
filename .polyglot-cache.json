@@ -1,0 +1,2315 @@
+{
+  "version": 1,
+  "entries": {
+    "284b928ae73ceadf": {
+      "translation": "**CLIツールのエラーに対する、決定論的なアクセシビリティ支援機能。追加機能であり、SAFEのみを使用し、プロファイルに基づいています。**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "2d5ce29c3c0e0c42": {
+      "translation": "**v0.4は、インタラクティブではなく、決定論的です。**\nツールからの出力を書き換えることはありません。ASSISTブロックのみを追加します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "e8cddf057923e25a": {
+      "translation": "なぜ",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "b17b0b92bff4eed8": {
+      "translation": "CLIツールがエラーを起こした場合、通常、エラーメッセージはツールを開発した開発者向けに書かれており、エラーから回復しようとしている人向けではありません。スクリーンリーダーを使用している、視覚障害がある、または認知的な負担がある場合、エラーメッセージや省略されたコードの羅列は役に立ちません。むしろ、別の障害となります。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "580869ee9f7e5505": {
+      "translation": "**a11y-assist**は、CLIエラーが発生した場合、構造化された回復ブロックを追加します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "0503662acecce599": {
+      "translation": "- 可能な場合は、提案を元のエラーIDに紐付けます。\n- 番号付きで、プロファイルに合わせて調整された回復プランを生成します。\n- SAFEコマンド（読み取り専用、テスト実行、ステータスチェック）のみを提案します。\n- 提案に対する信頼度を明示し、ユーザーが提案をどの程度信頼できるかを知ることができます。\n- 元のツールの出力を書き換えたり、隠したりすることはありません。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "95ea865d154a6e3d": {
+      "translation": "5つのアクセシビリティプロファイルが標準で用意されています。視覚障害者向け、認知負荷軽減向け、スクリーンリーダー向け、ディスレクシア向け、平易な言葉向けです。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "ea65604e8b784581": {
+      "translation": "インストール",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "7d194b782b217cae": {
+      "translation": "Python 3.11以降が必要です。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "d182d24c54cc50a7": {
+      "translation": "クイックスタート",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "428eff3d9fc56f50": {
+      "translation": "コマンド",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "377d830094c5bc2a": {
+      "translation": "コマンド",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "67731479bd4e364b": {
+      "translation": "説明",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "2a56d6ea96d9fd14": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "651826877e732548": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "d855f19276d9ee40": {
+      "translation": "`cli.error.v0.1` JSONからの高信頼度の支援",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "bdba8a169553e8c1": {
+      "translation": "生のCLIテキストからの最善の支援",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "4a6c15eff9a6bfaa": {
+      "translation": "最後にキャプチャされたログファイル (`~/.a11y-assist/last.log`)からの支援",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "acd718694407e3e6": {
+      "translation": "a11y-evidence-engineからの情報のインポート",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "569593c6ef29e412": {
+      "translation": "`last`コマンドの出力をキャプチャするラッパー",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "43e958c121e26c4c": {
+      "translation": "すべてのコマンドは、`--profile`、`--json-response`、および`--json-out`フラグを受け入れます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "06b148034b7b93bf": {
+      "translation": "アクセシビリティプロファイル",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "7fbd391a15fe0e4e": {
+      "translation": "`--profile`を使用して、ニーズに合わせて調整された出力を選択します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "1e9b5cd3ca77aef1": {
+      "translation": "プロファイル",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "2d7192993930e649": {
+      "translation": "主な利点",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "fa8a6f532fd328f7": {
+      "translation": "最大ステップ数",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "ad61f0cc5ec9865d": {
+      "translation": "主な調整点",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "b0e27d1a98f08b56": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "5267a4e52ef1849b": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "e84e2cd872d8eda7": {
+      "translation": "**lowvision** (デフォルト)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "a5721409b47394aa": {
+      "translation": "視覚的な明瞭さ",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "3e77163fbf66c0ea": {
+      "translation": "明確なラベル、番号付きのステップ、SAFEコマンド",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "4ae809e043d8c02e": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "1b494dddc3990b3d": {
+      "translation": "認知的な負担の軽減",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "f77025523cfce940": {
+      "translation": "目標の明示、開始/次/終了ラベル、短い文",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "2575be911e1c356e": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "e4d43a24f34ef236": {
+      "translation": "音声優先",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "ac2e1fb8d5298218": {
+      "translation": "音声読み上げ対応、省略形の展開、視覚的な参照なし",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "d591d644aa66d01b": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "4897222088394781": {
+      "translation": "読解の負担軽減",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "14b9405bc45660a0": {
+      "translation": "明確なラベル、記号的な強調なし、余白の追加",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "c408f7336a792e6a": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "1f1cd5f9c225811b": {
+      "translation": "最大限の明瞭さ",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "dc9f36ab3f39f4c0": {
+      "translation": "文ごとに1つの節、簡潔な構造",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "51d1a77526734f2c": {
+      "translation": "信頼度",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "58123bdea582f8e2": {
+      "translation": "意味",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "59196af31abc0d4d": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "69e70b451ff65bf9": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "33db9057cde4c9ca": {
+      "translation": "ID付きの検証済み`cli.error.v0.1` JSON",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "22a04125d559175d": {
+      "translation": "ツールが構造化されたエラー出力を生成",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "30d9d4ad1d29fbe9": {
+      "translation": "検出可能な`(ID: ...)`を含む生のテキスト",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "f2ed2984ff618c4f": {
+      "translation": "構造化されていないテキスト内でエラーIDが見つかった",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "3c4b64aeb9013ca7": {
+      "translation": "最善を尽くして解析したが、IDが見つからなかった",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "95962787da5d496a": {
+      "translation": "アンカーがないため、提案はヒューリスティックに基づいています",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "abed00869d8141bb": {
+      "translation": "信頼度は常に出力に表示されます。プロファイル変換中は、信頼度が向上することはありません。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "0aa1a2bc5357fcdd": {
+      "translation": "安全性の保証",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "a3a1575c8e5cee88": {
+      "translation": "a11y-assistは、Profile Guardシステムを通じて、実行時に厳格な安全性の制約を適用します。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "a84ed7ce7e0618a2": {
+      "translation": "- **SAFEモード専用コマンド:** 読み取り専用、テスト実行、および状態確認のコマンドのみが推奨されます。\n- **架空のIDは使用しない:** エラーIDは入力から取得するか、存在しない場合は何も表示されません。決して捏造されることはありません。\n- **架空の内容は使用しない:** プロファイルは内容を言い換えるだけで、新しい事実に基づく主張を追加することはありません。\n- **信頼度は常に表示:** 常に表示され、値は減少する可能性がありますが、増加することはありません。\n- **追加のみ:** 元のツールの出力は、変更、非表示、または抑制されることはありません。\n- **決定論的:** 同じ入力は常に同じ出力を生成します。ネットワーク接続やランダムな要素は使用しません。\n- **検証済み:** 各プロファイルの変換は、レンダリング前に不変条件に対して検証されます。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "8c92ebd8c6d482ee": {
+      "translation": "JSON出力 (CI / パイプライン)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "334b18e236dc1df0": {
+      "translation": "自動化のため、機械可読の出力を取得するには、`--json-response` オプションを使用してください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "1eb042d64621214a": {
+      "translation": "関連",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "b879d79c685b7624": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - ヘッドレス型エビデンスエンジン\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - アクセシビリティのためのMCPツール\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - CIワークフローを使用したデモサイト",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "bd927c669c7a0d9c": {
+      "translation": "貢献",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "a552719ad867058f": {
+      "translation": "ガイドラインについては、[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "08ea9dfbe36d981b": {
+      "translation": "ライセンス",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "5e7c5653fc3efae7": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088363742
+    },
+    "4fc609659c53a724": {
+      "translation": "**用于解决 CLI 错误的确定性辅助功能。增量式，仅支持 SAFE，基于配置文件的。**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "11b44860c76f6461": {
+      "translation": "**v0.4 版本不提供交互功能，且结果是确定的。**\n它不会重写工具的输出。它只会添加一个辅助信息块。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "9810d3815576feae": {
+      "translation": "原因",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "6de7a66851ff5a5e": {
+      "translation": "当 CLI 工具出现错误时，错误信息通常是为构建该工具的开发人员编写的，而不是为试图解决错误的用户编写的。如果您使用屏幕阅读器，视力较差，或者处于认知负荷状态，那么大量的堆栈跟踪和缩写代码并不能提供帮助，反而会成为一种障碍。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "9ac79a078578a59d": {
+      "translation": "**a11y-assist** 为任何 CLI 错误添加一个结构化的恢复信息块：",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "d94f52c8d5c859e1": {
+      "translation": "- 将建议与原始错误 ID 相关联（如果可用）。\n- 生成编号的、与配置文件相适应的恢复计划。\n- 仅建议 SAFE 命令（只读、模拟运行、状态检查）。\n- 公示置信度，以便用户了解应该对建议的信任程度。\n- 绝不会重写或隐藏原始工具的输出。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "a473d8fbce96203d": {
+      "translation": "默认情况下，提供五个辅助功能配置文件：低视力、认知负荷、屏幕阅读器、阅读障碍和简单语言。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "ed61d0d109031128": {
+      "translation": "安装",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "a374ef78881f4299": {
+      "translation": "需要 Python 3.11 或更高版本。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "3e6394397900eaa1": {
+      "translation": "快速入门",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "8832c5f489affaa5": {
+      "translation": "命令",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "ac280590ce6877ab": {
+      "translation": "命令",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "601d6e570e22e932": {
+      "translation": "描述",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "3c50ad19fc6c359b": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "dd5b28ff24f8cbdb": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "b82f783124575d34": {
+      "translation": "从 `cli.error.v0.1` JSON 获取高置信度的辅助信息。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "d26f44e7687adf18": {
+      "translation": "从原始 CLI 文本获取最佳的辅助信息。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "eac4546587a7741f": {
+      "translation": "从上次捕获的日志文件 (`~/.a11y-assist/last.log`) 获取辅助信息。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "238536f140eb8a55": {
+      "translation": "从 a11y-evidence-engine 导入发现结果。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "8f444039ba22c863": {
+      "translation": "一个包装器，用于捕获 `last` 命令的输出。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "47afad0508f130c8": {
+      "translation": "所有命令都接受 `--profile`、`--json-response` 和 `--json-out` 标志。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "d7f85b88b07ca713": {
+      "translation": "辅助功能配置文件",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "b02d526927a47674": {
+      "translation": "使用 `--profile` 标志选择适合您需求的输出：",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "7e3cbb08b728a10a": {
+      "translation": "配置文件",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "f2c1c35df4e3d520": {
+      "translation": "主要优势",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "26c9f586f9a00df0": {
+      "translation": "最大步骤数",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "a540f4521c722f34": {
+      "translation": "主要调整",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "8dcd33a6d382512c": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "10198921144da1d7": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "ed02e5ef885e0228": {
+      "translation": "**lowvision** (默认)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "240065f717db4ef5": {
+      "translation": "视觉清晰度",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "1c8b88edbc51c0ae": {
+      "translation": "清晰的标签、编号的步骤、SAFE 命令",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "ffd6ca5f94e9f81f": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "2d10b687d0e25529": {
+      "translation": "减少认知负担",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "773359fdacdbd655": {
+      "translation": "目标线、\"开始/下一步/结束\" 标签、更短的句子",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "1f9be78b84dd07bd": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412801
+    },
+    "55ab70936d9fb951": {
+      "translation": "以语音为优先",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "09765eb0d597ebeb": {
+      "translation": "适合文本转语音、展开缩写、无视觉引用",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "33b36c8cf24d4da6": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "cbac13e59f3c5bef": {
+      "translation": "减少阅读障碍",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "581da565a82235d7": {
+      "translation": "明确的标签、无符号强调、额外的间距",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "6ad1ed7d0353782d": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "b7b61af507c9481d": {
+      "translation": "最大清晰度",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "b81e16eb38f70a46": {
+      "translation": "每个句子一个子句、简化的结构",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "9d38e1ae4f6584dc": {
+      "translation": "置信度级别",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "d92f14b6efff6a75": {
+      "translation": "含义",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "d75d743091909926": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "7b7596c3d1d0c899": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "3e1025b3d1fffe7e": {
+      "translation": "已验证的 `cli.error.v0.1` JSON，包含 ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "bd1e5adcf9999e27": {
+      "translation": "工具发出结构化的错误输出",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "75e2bb31e573eef2": {
+      "translation": "原始文本，包含可检测的 `(ID: ...)`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "f6894141e94d3daf": {
+      "translation": "在非结构化文本中找到错误 ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "4a797af0955edb33": {
+      "translation": "最佳尝试解析，未找到 ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "9516adcedadb30df": {
+      "translation": "没有锚点；建议是基于启发式方法",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "e687250f9f2c06d8": {
+      "translation": "置信度始终在输出中显示。在配置文件转换过程中，置信度不会增加。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "e0f1999525f98a89": {
+      "translation": "安全保障",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "ff84532b28af559a": {
+      "translation": "a11y-assist 通过其配置文件保护系统，在运行时强制执行严格的安全约束：",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "023ed330534fac25": {
+      "translation": "- **仅限 SAFE 模式下的命令** — 仅建议使用只读、模拟运行和状态检查命令。\n- **不使用虚构的 ID** — 错误 ID 来自输入，或者不存在；绝不虚构。\n- **不添加额外内容** — 配置文件是对已有内容的重述，绝不添加新的事实性主张。\n- **明确显示置信度** — 始终显示；可以降低，但绝不能升高。\n- **仅进行增量修改** — 原始工具的输出永远不会被修改、隐藏或压制。\n- **确定性** — 相同的输入始终产生相同的输出；不涉及网络调用，不包含随机性。\n- **经过安全检查** — 每次配置文件转换都经过对不变性的验证，然后再进行渲染。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "245bad1b0c9bcdf5": {
+      "translation": "JSON 输出（CI / 流水线）",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "f3c336e128f655ab": {
+      "translation": "为了自动化，请使用 `--json-response` 参数以获取机器可读的输出。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "e1087cb5842c831a": {
+      "translation": "相关项目",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "b7a8defbfc01031d": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - 无头证据引擎\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - 用于辅助功能的 MCP 工具\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - 包含 CI 工作流的演示站点",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "f24c2aff2448e6af": {
+      "translation": "贡献",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "0ddcf2cf0f708b11": {
+      "translation": "请参阅 [CONTRIBUTING.md](CONTRIBUTING.md) 以获取贡献指南。",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "1fb815b9a436fadb": {
+      "translation": "许可证",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "892c2aa834c19cc2": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088412802
+    },
+    "3f1264618430eaae": {
+      "translation": "**Asistencia determinista para fallos en la interfaz de línea de comandos (CLI). Aditiva, solo para comandos SAFE, basada en perfiles.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "400d007c39b93e5e": {
+      "translation": "**La versión 0.4 es no interactiva y determinista.**\nNunca modifica la salida de las herramientas. Solo añade un bloque de ASISTENCIA.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "5d816d36d89fe697": {
+      "translation": "¿Por qué?",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "488d45b6b42883f1": {
+      "translation": "Cuando una herramienta de la interfaz de línea de comandos falla, el mensaje de error suele estar escrito para el desarrollador que la creó, no para la persona que intenta recuperarse del fallo. Si utiliza un lector de pantalla, tiene problemas de visión o está bajo estrés cognitivo, una gran cantidad de trazas de pila y códigos abreviados no son útiles; es otro obstáculo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "a1b79c363a62ee27": {
+      "translation": "**a11y-assist** añade un bloque de recuperación estructurado a cualquier fallo de la interfaz de línea de comandos:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "cffc18f48033fcfb": {
+      "translation": "- Asocia las sugerencias al ID de error original (cuando está disponible).\n- Genera planes de recuperación numerados y adaptados al perfil.\n- Solo sugiere comandos SAFE (solo lectura, pruebas, comprobaciones de estado).\n- Indica el nivel de confianza para que el usuario sepa cuánto puede confiar en la sugerencia.\n- Nunca modifica ni oculta la salida original de la herramienta.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "fd0526427397bb98": {
+      "translation": "Cinco perfiles de accesibilidad están disponibles de forma predeterminada: visión reducida, estrés cognitivo, lector de pantalla, dislexia y lenguaje sencillo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "144b06b61516beec": {
+      "translation": "Instalación",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "02a5d530cfa58fee": {
+      "translation": "Requiere Python 3.11 o posterior.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "785321ff8279266b": {
+      "translation": "Inicio rápido",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "b642eed6d34eeba8": {
+      "translation": "Comandos",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "c6098ef36396741e": {
+      "translation": "Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "a0102622d03d4c0f": {
+      "translation": "Descripción",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "f2088caa76d4a948": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "184e6ce2c9237895": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "19671df87f6ba9d2": {
+      "translation": "Asistencia de alta confianza a partir de JSON de `cli.error.v0.1`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "c8788df232faa1dc": {
+      "translation": "Asistencia con el máximo esfuerzo a partir de texto sin formato de la interfaz de línea de comandos",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "f740c6e788e59d7e": {
+      "translation": "Asistencia a partir del último registro capturado (`~/.a11y-assist/last.log`)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "d01c8c257e1abb00": {
+      "translation": "Importa resultados de a11y-evidence-engine",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "09136e9e814c245d": {
+      "translation": "Envoltorio que captura la salida para `last`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "9bf48a6669c3a59c": {
+      "translation": "Todos los comandos aceptan las opciones `--profile`, `--json-response` y `--json-out`.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "8236992f59c83b21": {
+      "translation": "Perfiles de accesibilidad",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "9993746943b0bde9": {
+      "translation": "Utilice `--profile` para seleccionar una salida adaptada a sus necesidades:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "fb536d60a4ccd219": {
+      "translation": "Perfil",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "2882959c9534214f": {
+      "translation": "Beneficio principal",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "03e3187c16f87388": {
+      "translation": "Número máximo de pasos",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "ec786ac98c6921e7": {
+      "translation": "Adaptaciones clave",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "a0324d67f77cc3ed": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "8d960fb67d9cab35": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "222e955b9e59c233": {
+      "translation": "**lowvision** (predeterminado)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "6e9f1a99eb6b713b": {
+      "translation": "Claridad visual",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "8a7baf387b7e3025": {
+      "translation": "Etiquetas claras, pasos numerados, comandos SAFE",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "c3cda8d6f8376b8b": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "700b18ba8247ceef": {
+      "translation": "Reducción de la carga mental",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "3b96f5ced9e46667": {
+      "translation": "Línea de objetivo, etiquetas \"Primero/Siguiente/Último\", frases más cortas",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "028775bffe4c7f2a": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "fb1ae81473563d9b": {
+      "translation": "Prioridad al audio",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "38439ebbf596a834": {
+      "translation": "Compatible con TTS, abreviaturas expandidas, sin referencias visuales",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "6884c817be36c5f4": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "4e9f490301165325": {
+      "translation": "Reducción de la dificultad de lectura",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "f63b9b201b2d158d": {
+      "translation": "Etiquetas explícitas, sin énfasis simbólicos, espaciado adicional",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "38479bf492d32ee5": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "1c70e804c04bd888": {
+      "translation": "Máxima claridad",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "e90676a3b98b4105": {
+      "translation": "Una cláusula por frase, estructura simplificada",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "4f3a2136fb3aea1a": {
+      "translation": "Niveles de confianza",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "a9e0b03a532423f7": {
+      "translation": "Significado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "58e46b91ebfb210e": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "4110d0f8faecdeab": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "bcd4047ee9ef964d": {
+      "translation": "JSON de `cli.error.v0.1` validado con ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "611a7fff30bb58a9": {
+      "translation": "La herramienta emite una salida de error estructurada",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "6d087352db0df9a5": {
+      "translation": "Texto sin formato con `(ID: ...)` detectable",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "ddba6acd448552a1": {
+      "translation": "Se encuentra un ID de error en texto no estructurado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "a543570075cc0620": {
+      "translation": "Análisis con el máximo esfuerzo, no se encuentra ningún ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "a693027f3daea401": {
+      "translation": "Sin anclaje; las sugerencias son heurísticas",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "01b44c9d617d23ee": {
+      "translation": "El nivel de confianza se muestra siempre en la salida. No aumenta durante la transformación del perfil.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "901e48c9b63b7e4a": {
+      "translation": "Garantías de seguridad",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "009fda9ed0ad0c71": {
+      "translation": "a11y-assist aplica estrictas invariantes de seguridad en tiempo de ejecución a través de su sistema de Protección de Perfiles:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "13de0d6f7ab913be": {
+      "translation": "- **Comandos solo de solo lectura** — solo se sugieren comandos de solo lectura, de prueba y de verificación de estado.\n- **No se inventan identificadores** — los identificadores de error provienen de la entrada o están ausentes; nunca se inventan.\n- **No se inventa contenido** — los perfiles reformulan, pero nunca añaden nuevas afirmaciones fácticas.\n- **Confianza revelada** — siempre se muestra; puede disminuir, pero nunca aumentar.\n- **Solo aditivo** — la salida original de la herramienta nunca se modifica, se oculta ni se suprime.\n- **Determinista** — la misma entrada siempre produce la misma salida; no hay llamadas a la red, ni aleatoriedad.\n- **Verificado con protecciones** — cada transformación de perfil se valida contra invariantes antes de renderizarse.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "54a2557d703596bd": {
+      "translation": "Salida JSON (CI / Pipelines)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "792f7ff30170660d": {
+      "translation": "Para la automatización, utilice `--json-response` para obtener una salida legible por máquina:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "7427f620e7051d56": {
+      "translation": "Relacionado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "7c94753a8e63b810": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - Motor de evidencia sin interfaz.\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - Herramientas MCP para la accesibilidad.\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - Demostración con flujos de trabajo de CI.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "7bdc45e8ddfa02fc": {
+      "translation": "Contribuciones",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "2cad16224cad7ba4": {
+      "translation": "Consulte [CONTRIBUTING.md](CONTRIBUTING.md) para obtener las pautas.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "9572f74b6d3f62b1": {
+      "translation": "Licencia",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "e4731ea7699353e4": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088468240
+    },
+    "4ea120c4a99fa0a7": {
+      "translation": "**Assistance déterministe pour les erreurs des interfaces en ligne de commande (CLI). Additive, uniquement pour les commandes SAFE, basée sur des profils.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508517
+    },
+    "3b0ae418cd314722": {
+      "translation": "**La version 0.4 est non interactive et déterministe.**\nElle ne modifie jamais la sortie des outils. Elle ajoute uniquement un bloc d'ASSISTANCE.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508517
+    },
+    "f80fd7f517f0a656": {
+      "translation": "Pourquoi ?",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508517
+    },
+    "ebfbec24bf09410e": {
+      "translation": "Lorsqu'un outil CLI rencontre une erreur, le message d'erreur est généralement rédigé pour le développeur qui l'a créé, et non pour la personne qui essaie de résoudre le problème. Si vous utilisez un lecteur d'écran, si vous avez une déficience visuelle ou si vous êtes en état de stress cognitif, une longue liste de traces de pile et de codes abrégés n'est pas une aide ; c'est un autre obstacle.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508517
+    },
+    "0bead9ccaff1c260": {
+      "translation": "**a11y-assist** ajoute un bloc de récupération structuré à toute erreur CLI :",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508517
+    },
+    "efbb44f54ceb4853": {
+      "translation": "- Les suggestions sont liées à l'ID d'erreur d'origine (lorsqu'il est disponible).\n- Elle génère des plans de récupération numérotés et adaptés au profil.\n- Elle ne propose que des commandes SAFE (lecture seule, test, vérifications d'état).\n- Elle indique le niveau de confiance afin que l'utilisateur sache dans quelle mesure il peut faire confiance à la suggestion.\n- Elle ne modifie ni ne masque jamais la sortie d'origine de l'outil.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508517
+    },
+    "9a9eab54b5334258": {
+      "translation": "Cinq profils d'accessibilité sont disponibles par défaut : déficience visuelle, surcharge cognitive, lecteur d'écran, dyslexie et langage clair.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "6c946ac8441b05e9": {
+      "translation": "Installation",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "291e0ffcc0e46bb6": {
+      "translation": "Nécessite Python 3.11 ou une version ultérieure.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "caef1b750e85e405": {
+      "translation": "Démarrage rapide",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "d130c8deb001bde1": {
+      "translation": "Commandes",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "38ea467b84937d7f": {
+      "translation": "Commande",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "9a51c5b4f05710c0": {
+      "translation": "Description",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "9c7087410e6c6801": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "42738f280dbf39b2": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "c173528bff83a8aa": {
+      "translation": "Assistance de haute qualité à partir du JSON `cli.error.v0.1`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "787f3df35f0947fe": {
+      "translation": "Assistance de qualité variable à partir du texte brut de la CLI",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "6f72eab420e3be91": {
+      "translation": "Assistance à partir du dernier journal capturé (`~/.a11y-assist/last.log`)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "854e758ae147c8c0": {
+      "translation": "Importation des résultats de a11y-evidence-engine",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "19fdaad3bfac1aa0": {
+      "translation": "Wrapper qui capture la sortie pour la commande `last`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "900ebbfea52016cb": {
+      "translation": "Toutes les commandes acceptent les drapeaux `--profile`, `--json-response` et `--json-out`.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "049ba47094695498": {
+      "translation": "Profils d'accessibilité",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "061dfe82c991fbe2": {
+      "translation": "Utilisez le drapeau `--profile` pour sélectionner une sortie adaptée à vos besoins :",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "dd641245f06b5192": {
+      "translation": "Profil",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "30e8a946c3f1a633": {
+      "translation": "Avantage principal",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "241a241df53b6c9c": {
+      "translation": "Nombre maximal d'étapes",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "2e98f35dfe1fb33e": {
+      "translation": "Adaptations clés",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "fa2cf08685d4cc07": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "d342ebe446ad84bf": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "e6a56f89ad1456b2": {
+      "translation": "**lowvision** (par défaut)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "c8841e4f5b025549": {
+      "translation": "Clarté visuelle",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "c5db516b0d307908": {
+      "translation": "Étiquettes claires, étapes numérotées, commandes SAFE",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "0c0420003493110d": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "7d107f1341db51a1": {
+      "translation": "Réduction de la charge mentale",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "44a210d8a11fc7cc": {
+      "translation": "Ligne de but, étiquettes \"Précédent/Suivant/Dernier\", phrases plus courtes",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "1832fbfce953d3df": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "e619db0c7d785146": {
+      "translation": "Priorité à l'audio",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "bffb80e6b8c616dd": {
+      "translation": "Compatible avec la synthèse vocale, abréviations développées, pas de références visuelles",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "3f3a4a7658b59870": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "5e84099f18f9e6ee": {
+      "translation": "Réduction des difficultés de lecture",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "84daa4c1980f8141": {
+      "translation": "Étiquettes explicites, pas d'emphase symbolique, espacement supplémentaire",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "561e99c557f0744f": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "e61b416c7ca36d9c": {
+      "translation": "Clarté maximale",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "e470e84d9ec7d2cb": {
+      "translation": "Une clause par phrase, structure simplifiée",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "678d215315954918": {
+      "translation": "Niveaux de confiance",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "785c7a450a789477": {
+      "translation": "Signification",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "b8a31ebdae787756": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "86d5118e773cafab": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "c62bdd4ea2b314e5": {
+      "translation": "JSON `cli.error.v0.1` validé avec ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "dd8b03b2ade8c461": {
+      "translation": "L'outil émet une sortie d'erreur structurée",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "a11f6a0622234c35": {
+      "translation": "Texte brut avec `(ID: ...)` détectable",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "069163804b4a3e6e": {
+      "translation": "ID d'erreur trouvé dans un texte non structuré",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "bb239e0da8ddbac2": {
+      "translation": "Analyse approximative, aucun ID trouvé",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "c5229f3e7a04cbf1": {
+      "translation": "Pas d'ancre ; les suggestions sont heuristiques",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "ca1eb55aadad1d82": {
+      "translation": "Le niveau de confiance est toujours indiqué dans la sortie. Il n'augmente jamais lors de la transformation du profil.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "baa545f01ef998e2": {
+      "translation": "Garanties de sécurité",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "9264fdb8d025c7ac": {
+      "translation": "a11y-assist applique des invariants de sécurité stricts au moment de l'exécution grâce à son système de \"Profile Guard\" :",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "57ea4fc458977596": {
+      "translation": "- **Commandes SAFE uniquement** : Seules les commandes en lecture seule, les tests préliminaires et les vérifications d'état sont proposées.\n- **Aucune ID inventée** : Les identifiants d'erreur proviennent de l'entrée ou sont absents ; ils ne sont jamais fabriqués.\n- **Aucun contenu inventé** : Les profils reformulent, mais n'ajoutent jamais de nouvelles affirmations factuelles.\n- **Confiance divulguée** : Affichée en permanence ; elle peut diminuer, mais jamais augmenter.\n- **Additive uniquement** : La sortie de l'outil original n'est jamais modifiée, masquée ou supprimée.\n- **Déterministe** : La même entrée produit toujours la même sortie ; aucune requête réseau, aucune aléatoire.\n- **Vérification des contraintes** : Chaque transformation de profil est validée par rapport aux contraintes avant d'être affichée.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "3f95086e7b024b73": {
+      "translation": "Sortie JSON (CI / Pipelines)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "41094ae50ccc76a7": {
+      "translation": "Pour l'automatisation, utilisez `--json-response` pour obtenir une sortie lisible par machine :",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "cc69b11148f6ac8d": {
+      "translation": "Liés",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "051866ba62b05f44": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - Moteur d'analyse headless\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - Outils MCP pour l'accessibilité\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - Démonstration avec des flux de travail CI",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "262cf60b803dacd5": {
+      "translation": "Contribution",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "0c9be19af14b9ae7": {
+      "translation": "Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour connaître les directives.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "0174ffc9d6992c72": {
+      "translation": "Licence",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "c19c2b7dfc530297": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088508518
+    },
+    "a1adcbfaf5b602a7": {
+      "translation": "**CLI (कमांड लाइन इंटरफेस) विफल होने पर, सुलभ सहायता। योज्य, केवल SAFE विकल्पों का उपयोग करने वाला, प्रोफाइल-आधारित।**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "5c67c76cc70d58d0": {
+      "translation": "**v0.4 गैर-इंटरैक्टिव और निश्चित है।**\nयह कभी भी टूल के आउटपुट को दोबारा नहीं लिखता है। यह केवल एक 'सहायता' ब्लॉक जोड़ता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "04d49f6a9c899e5b": {
+      "translation": "क्यों?",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "3d1aa1305ff83aae": {
+      "translation": "जब कोई CLI टूल विफल होता है, तो त्रुटि संदेश आमतौर पर उस डेवलपर के लिए लिखा जाता है जिसने इसे बनाया है, न कि उस व्यक्ति के लिए जो इसे ठीक करने की कोशिश कर रहा है। यदि आप स्क्रीन रीडर का उपयोग करते हैं, आपकी दृष्टि कमजोर है, या आप मानसिक तनाव में हैं, तो ढेर सारे त्रुटि संदेश और संक्षिप्त कोड आपकी मदद नहीं करेंगे - यह एक और बाधा है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "74d35ecf3117acd8": {
+      "translation": "**a11y-assist** किसी भी CLI विफलता में एक संरचित रिकवरी ब्लॉक जोड़ता है:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "ea4815b98e7e5256": {
+      "translation": "- यह सुझावों को मूल त्रुटि आईडी से जोड़ता है (जब उपलब्ध हो)।\n- यह क्रमांकित, प्रोफाइल-अनुकूल रिकवरी योजनाएं उत्पन्न करता है।\n- यह केवल SAFE कमांड (केवल पढ़ने के लिए, परीक्षण, स्थिति जांच) का सुझाव देता है।\n- यह आत्मविश्वास का स्तर बताता है ताकि उपयोगकर्ता को पता चल सके कि उसे सुझाव पर कितना भरोसा करना चाहिए।\n- यह कभी भी मूल टूल के आउटपुट को दोबारा नहीं लिखता है या उसे छिपाता नहीं है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "460ecc0431cbf4ae": {
+      "translation": "पांच पहुंच प्रोफाइल डिफ़ॉल्ट रूप से उपलब्ध हैं: कम दृष्टि, मानसिक तनाव, स्क्रीन रीडर, डिस्लेक्सिया और सरल भाषा।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "7670bd721a08293f": {
+      "translation": "इंस्टॉल करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "3c0dafda645c6e1d": {
+      "translation": "इसके लिए Python 3.11 या बाद के संस्करण की आवश्यकता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "abb619d8b0588257": {
+      "translation": "शुरुआत",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "ca9b6a3bca90a635": {
+      "translation": "कमांड",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "30e4c5d85406a4a4": {
+      "translation": "कमांड",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "b8423b5b4842cbda": {
+      "translation": "विवरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "1a20fc4dc8ce3304": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "bc35e1f9228e8622": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "059c3b337a208506": {
+      "translation": "`cli.error.v0.1` JSON से उच्च-विश्वास वाली सहायता",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "9f773496396e6dce": {
+      "translation": "कच्चे CLI टेक्स्ट से सर्वोत्तम संभव सहायता",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "11f0a6239c720bd0": {
+      "translation": "अंतिम कैप्चर किए गए लॉग (`~/.a11y-assist/last.log`) से सहायता",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "1a735513a746939e": {
+      "translation": "a11y-evidence-engine से निष्कर्ष आयात करें",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "478d50b415fffc83": {
+      "translation": "एक रैपर जो `last` के लिए आउटपुट कैप्चर करता है",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "1b6f7e0c354e3143": {
+      "translation": "सभी कमांड `--profile`, `--json-response`, और `--json-out` ध्वज स्वीकार करते हैं।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "4a843260db5f8064": {
+      "translation": "पहुंच प्रोफाइल",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "88c9f7e40ac1474a": {
+      "translation": "अपनी आवश्यकताओं के अनुसार आउटपुट को अनुकूलित करने के लिए `--profile` का उपयोग करें:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "df1aa226c081bbf9": {
+      "translation": "प्रोफाइल",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "6e581d7913aa7e90": {
+      "translation": "मुख्य लाभ",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "44e5b489f0c1fc66": {
+      "translation": "अधिकतम चरण",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "4723bdf30ceee26a": {
+      "translation": "मुख्य अनुकूलन",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "dd6357ea097c51bd": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "03eb21bf393bcd87": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "5b706727c0adfefe": {
+      "translation": "**lowvision** (डिफ़ॉल्ट)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "575fcd9dcd5f445a": {
+      "translation": "दृश्य स्पष्टता",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "84064f2000bc3641": {
+      "translation": "स्पष्ट लेबल, क्रमांकित चरण, SAFE कमांड",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "309de24adaa97eb6": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "0d5cc7802f2f0a73": {
+      "translation": "मानसिक चरणों में कमी",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "6f4f65bc06c86b9b": {
+      "translation": "लक्ष्य रेखा, 'पहला/अगला/अंतिम' लेबल, छोटे वाक्य",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "fb4adfbfe523435a": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "51a3cdc49ac311dd": {
+      "translation": "ऑडियो-प्रथम",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "a8aea7ce72471966": {
+      "translation": "TTS-अनुकूल, संक्षिप्त शब्दों का विस्तार, कोई दृश्य संदर्भ नहीं",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "9ba70484aa9a0662": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "7ce7da62edd9ec4f": {
+      "translation": "पढ़ने में कठिनाई में कमी",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "b9a04c5b98b0c56c": {
+      "translation": "स्पष्ट लेबल, प्रतीकात्मक जोर नहीं, अतिरिक्त स्पेसिंग",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "e7f093530242db87": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "7f2b4f2d833018b4": {
+      "translation": "अधिकतम स्पष्टता",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "c3493dfe377f1633": {
+      "translation": "प्रत्येक वाक्य में एक खंड, सरलीकृत संरचना",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "2703245096e192a5": {
+      "translation": "आत्मविश्वास स्तर",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "8e6cc4fa69314024": {
+      "translation": "अर्थ",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "6da5100c388f6595": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "1cb2d43271f2ec1d": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "e62104bc5d6c6e0f": {
+      "translation": "ID के साथ मान्य `cli.error.v0.1` JSON",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "083163299515e009": {
+      "translation": "टूल संरचित त्रुटि आउटपुट उत्सर्जित करता है",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "c7d7b78ee3eb5884": {
+      "translation": "पहचान योग्य `(ID: ...)` के साथ कच्चा टेक्स्ट",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "23a81c6c824462ab": {
+      "translation": "असंरचित टेक्स्ट में त्रुटि आईडी पाया गया",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "c879f822aa2e33fb": {
+      "translation": "सर्वोत्तम संभव पार्सिंग, कोई आईडी नहीं मिला",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "a08d9849310f5ffa": {
+      "translation": "कोई एंकर नहीं; सुझाव अनुमानित हैं",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "a2e5ed265bd0009d": {
+      "translation": "आत्मविश्वास हमेशा आउटपुट में बताया जाता है। यह प्रोफाइल परिवर्तन के दौरान कभी नहीं बढ़ता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "41d82bf9bb09bc62": {
+      "translation": "सुरक्षा गारंटी",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "1933037e04bf8473": {
+      "translation": "a11y-assist अपने प्रोफाइल गार्ड सिस्टम के माध्यम से रनटाइम पर सख्त सुरक्षा नियमों का पालन करता है:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "94e3043f802b7717": {
+      "translation": "- **केवल सुरक्षित कमांड** — केवल पढ़ने के लिए, परीक्षण चलाने और स्थिति जांचने वाले कमांडों की सिफारिश की जाती है।\n- **कोई मनगढ़ंत आईडी नहीं** — त्रुटि आईडी या तो इनपुट से आती हैं या अनुपस्थित होती हैं; कभी भी बनाई नहीं जाती हैं।\n- **कोई मनगढ़ंत सामग्री नहीं** — प्रोफाइल जानकारी को फिर से प्रस्तुत करते हैं, लेकिन कभी भी नई तथ्यात्मक जानकारी नहीं जोड़ते हैं।\n- **आत्मविश्वास का खुलासा** — हमेशा दिखाया जाता है; यह कम हो सकता है, लेकिन कभी भी बढ़ नहीं सकता।\n- **केवल अतिरिक्त** — मूल टूल का आउटपुट कभी भी संशोधित, छिपाया या दबाया नहीं जाता है।\n- **निश्चित** — समान इनपुट हमेशा समान आउटपुट उत्पन्न करता है; कोई नेटवर्क कॉल नहीं, कोई यादृच्छिकता नहीं।\n- **सुरक्षा जांच** — प्रत्येक प्रोफाइल परिवर्तन को प्रस्तुत करने से पहले, अपरिवर्तनीयताओं के विरुद्ध मान्य किया जाता है।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "9eac181b7e17b0bd": {
+      "translation": "JSON आउटपुट (CI / पाइपलाइन)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "ddd31a84b073c2df": {
+      "translation": "स्वचालन के लिए, मशीन-पठनीय आउटपुट प्राप्त करने के लिए `--json-response` का उपयोग करें:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "198202c8da4b38a1": {
+      "translation": "संबंधित",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "e8de3909dc40ead2": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - हेडलेस प्रमाण इंजन\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - पहुंच के लिए MCP उपकरण\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - CI वर्कफ़्लो के साथ डेमो",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "4e8133210bd702a6": {
+      "translation": "योगदान",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "df87bf558ca13f03": {
+      "translation": "मार्गदर्शिका के लिए [CONTRIBUTING.md](CONTRIBUTING.md) देखें।",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "cfbc372f8058f151": {
+      "translation": "लाइसेंस",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "69121a20c478d6f4": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088548215
+    },
+    "e4cc9e689993805d": {
+      "translation": "**Assistenza deterministica per la gestione degli errori delle interfacce a riga di comando (CLI). Approccio incrementale, esclusivamente SAFE, basato su profili.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "769af088c703700e": {
+      "translation": "**La versione 0.4 è non interattiva e deterministica.**\nNon sovrascrive mai l'output degli strumenti. Aggiunge solo un blocco di ASSISTENZA.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "4c0c64056baf3061": {
+      "translation": "Perché",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "fec4d3a03056be3f": {
+      "translation": "Quando uno strumento CLI genera un errore, il messaggio di errore è spesso scritto per lo sviluppatore che lo ha creato, e non per la persona che sta cercando di risolvere il problema. Se si utilizza uno screen reader, si ha una vista limitata o si è sotto stress cognitivo, una serie di messaggi di errore e codici abbreviati non sono di aiuto: sono un ulteriore ostacolo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "7711125a9aacae82": {
+      "translation": "**a11y-assist** aggiunge un blocco strutturato per la risoluzione dei problemi a qualsiasi errore di CLI:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "c9faf9f94ff28ea6": {
+      "translation": "- Associa i suggerimenti all'ID dell'errore originale (quando disponibile).\n- Genera piani di risoluzione dei problemi numerati e adattati al profilo.\n- Suggerisce solo comandi SAFE (solo lettura, test, controlli di stato).\n- Indica il livello di affidabilità in modo che l'utente sappia quanto fidarsi del suggerimento.\n- Non sovrascrive né nasconde mai l'output originale dello strumento.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "0f616c384bd1d58b": {
+      "translation": "Cinque profili di accessibilità sono inclusi: vista ridotta, carico cognitivo, screen reader, dislessia e linguaggio semplice.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "ff5580523b6052cc": {
+      "translation": "Installazione",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "05bcf07a1a33115e": {
+      "translation": "Richiede Python 3.11 o versioni successive.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "d7e9780fb2074bec": {
+      "translation": "Guida rapida",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "1c2535dbaea635ca": {
+      "translation": "Comandi",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "db315579460c4d77": {
+      "translation": "Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "3af38881e7f28db0": {
+      "translation": "Descrizione",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "859008cc19c8d7e4": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "5acc6809afb159f0": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "310b48d21ebefc55": {
+      "translation": "Assistenza da file JSON `cli.error.v0.1` con alta affidabilità.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "b5329c958d61bd28": {
+      "translation": "Assistenza approssimativa da testo CLI grezzo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "74458993a59f9a8c": {
+      "translation": "Assistenza dal log più recente (`~/.a11y-assist/last.log`).",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "f430e7b063945a89": {
+      "translation": "Importazione di risultati da a11y-evidence-engine.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "2602c04fa421d0d9": {
+      "translation": "Wrapper che cattura l'output per il comando `last`.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "5d357f3cfee5c8e2": {
+      "translation": "Tutti i comandi accettano i flag `--profile`, `--json-response` e `--json-out`.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "97893d5f12430a7b": {
+      "translation": "Profili di accessibilità",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "219fc6e36874704a": {
+      "translation": "Utilizzare il flag `--profile` per selezionare un output adattato alle proprie esigenze:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "2fc82f1bead63429": {
+      "translation": "Profilo",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "9be38d07a7ba9d58": {
+      "translation": "Vantaggio principale",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "7e2aba7761333334": {
+      "translation": "Numero massimo di passaggi",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "87edb7c09d94b573": {
+      "translation": "Adattamenti principali",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "0a5ab8a18268e424": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "b7dd8da33d76c15e": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "32b83d808dcccfda": {
+      "translation": "**lowvision** (predefinito)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "e7dec4828b54b383": {
+      "translation": "Chiarezza visiva",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "3776ac4dc7a6fe87": {
+      "translation": "Etichette chiare, passaggi numerati, comandi SAFE.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "266cbe894f3b1929": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "bc5ad98a4c8d2299": {
+      "translation": "Riduzione del carico mentale",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "feab9796aa11e23c": {
+      "translation": "Indicazioni chiare, etichette \"Inizio/Avanti/Fine\", frasi più brevi.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "5cb5f00a8133d192": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "781c8ab9df9b6eba": {
+      "translation": "Priorità all'audio",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "c2c7a14f03027e41": {
+      "translation": "Compatibile con la sintesi vocale, abbreviazioni espanse, nessuna referenza visiva.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "05b1dc90660e2fb9": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "60eb8b5557823926": {
+      "translation": "Riduzione delle difficoltà di lettura",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "db5f39cd70d27952": {
+      "translation": "Etichette esplicite, nessuna enfasi simbolica, spaziatura aggiuntiva.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "8fe4d22104152a04": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "fceb292cae607ab4": {
+      "translation": "Massima chiarezza",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "d127827a57e49d26": {
+      "translation": "Una clausola per frase, struttura semplificata.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "ebb79c174639c570": {
+      "translation": "Livelli di affidabilità",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "69fb964a4ef1e52e": {
+      "translation": "Significato",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "4f16a25e942668c8": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "a8e2cbb75c81ee97": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "112233daa8b765db": {
+      "translation": "File JSON `cli.error.v0.1` validato con ID.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "dadf29865840563a": {
+      "translation": "Lo strumento emette un output di errore strutturato.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "768ee2059ff341ab": {
+      "translation": "Testo grezzo con rilevamento di `(ID: ...)`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "71ed59ed15766303": {
+      "translation": "ID dell'errore trovato in testo non strutturato.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "5958f657631f5235": {
+      "translation": "Analisi approssimativa, nessun ID trovato.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "0cb74dc6b6bb8f8c": {
+      "translation": "Nessun riferimento; i suggerimenti sono euristici.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "415851c7ebd4a264": {
+      "translation": "L'affidabilità è sempre indicata nell'output. Non aumenta durante la trasformazione del profilo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "134384498544541b": {
+      "translation": "Garanzie di sicurezza",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "f780c326e5d7620f": {
+      "translation": "a11y-assist applica rigidi vincoli di sicurezza durante l'esecuzione tramite il suo sistema di Profile Guard:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "aadafe0c61b0d862": {
+      "translation": "- **Comandi solo in modalità \"SAFE\"**: vengono suggeriti solo comandi di sola lettura, test preliminari e controlli di stato.\n- **Nessun ID inventato**: gli ID degli errori provengono dall'input o sono assenti; non vengono mai creati artificialmente.\n- **Nessun contenuto inventato**: i profili riformulano le informazioni, ma non aggiungono nuove affermazioni fattuali.\n- **Livello di confidenza dichiarato**: viene sempre mostrato; può diminuire, ma non aumentare.\n- **Solo aggiunte**: l'output dello strumento originale non viene mai modificato, nascosto o soppresso.\n- **Deterministico**: lo stesso input produce sempre lo stesso output; non ci sono chiamate di rete, né elementi casuali.\n- **Controllato tramite \"guard\"**: ogni trasformazione del profilo viene validata rispetto a vincoli predefiniti prima di essere visualizzata.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "ac223682ee2a19c4": {
+      "translation": "Output JSON (CI / Pipeline)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "9fbb7b1ad6d8535f": {
+      "translation": "Per l'automazione, utilizzare `--json-response` per ottenere un output leggibile dalle macchine:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "5b40fe1c944f2442": {
+      "translation": "Correlati",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "55596215bbb4d58f": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - Motore di analisi headless\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - Strumenti MCP per l'accessibilità\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - Dimostrazione con flussi di lavoro CI",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "137a2378c67aaccf": {
+      "translation": "Contributi",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "1054dc469dcab9ec": {
+      "translation": "Consultare [CONTRIBUTING.md](CONTRIBUTING.md) per le linee guida.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "0870aa1dcfea97cc": {
+      "translation": "Licenza",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "c87c0c0fca261018": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088588460
+    },
+    "fbbcdf2c9991f15b": {
+      "translation": "**Assistência determinística para falhas na interface de linha de comando (CLI). Aditiva, exclusiva para comandos SAFE, orientada por perfil.**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "7a8cc34d7fd61d1e": {
+      "translation": "**A versão 0.4 é não interativa e determinística.**\nEla nunca sobrescreve a saída da ferramenta. Ela apenas adiciona um bloco de ASSISTÊNCIA.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "739de2da43412225": {
+      "translation": "Por que?",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "ca1d03d32b972e0b": {
+      "translation": "Quando uma ferramenta de linha de comando falha, a mensagem de erro geralmente é escrita para o desenvolvedor que a criou, e não para a pessoa que está tentando se recuperar do erro. Se você usa um leitor de tela, tem baixa visão ou está sob carga cognitiva, uma série de rastreamentos de pilha e códigos abreviados não são úteis – são apenas mais um obstáculo.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "38491dac5ec2fa24": {
+      "translation": "O **a11y-assist** adiciona um bloco de recuperação estruturado a qualquer falha na linha de comando:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "34c43d174260038a": {
+      "translation": "- Vincula as sugestões ao ID de erro original (quando disponível).\n- Gera planos de recuperação numerados e adaptados ao perfil.\n- Sugere apenas comandos SAFE (somente leitura, teste, verificações de status).\n- Informa o nível de confiança para que o usuário saiba o quanto pode confiar na sugestão.\n- Nunca sobrescreve ou oculta a saída original da ferramenta.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "6871a24ea98721af": {
+      "translation": "Cinco perfis de acessibilidade são fornecidos por padrão: baixa visão, carga cognitiva, leitor de tela, dislexia e linguagem simples.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "4898ae5813bd2bb7": {
+      "translation": "Instalação",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "230508fdc0230fa6": {
+      "translation": "Requer Python 3.11 ou posterior.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "c88bcdb0dd505b6b": {
+      "translation": "Início rápido",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "4c1d54d6dcb1e648": {
+      "translation": "Comandos",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "d1e1550c54676195": {
+      "translation": "Comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "4fe83802bbc45fcc": {
+      "translation": "Descrição",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "eeb243aa53a24f8e": {
+      "translation": "---------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "7561209f94247c19": {
+      "translation": "-------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "566f3d99d0a4492e": {
+      "translation": "Assistência com alta confiança a partir de JSON `cli.error.v0.1`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "015114590a5944b1": {
+      "translation": "Assistência com o máximo de esforço a partir de texto bruto da linha de comando",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "f1e2e6efa1f8a221": {
+      "translation": "Assistência a partir do último log capturado (`~/.a11y-assist/last.log`)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "23b91246e69b81a6": {
+      "translation": "Importa resultados do a11y-evidence-engine",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "5a5b26179c6bb419": {
+      "translation": "Wrapper que captura a saída para o comando `last`",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "c47170e474c2a7f4": {
+      "translation": "Todos os comandos aceitam as flags `--profile`, `--json-response` e `--json-out`.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "fbb502846a9da55b": {
+      "translation": "Perfis de Acessibilidade",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "667197375316d97a": {
+      "translation": "Use a flag `--profile` para selecionar a saída adaptada às suas necessidades:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "b9a1e302545de211": {
+      "translation": "Perfil",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "3611d174aa63fb9f": {
+      "translation": "Benefício principal",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "6a7ef92facb03cef": {
+      "translation": "Número máximo de etapas",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "f6935a7bd2d1824c": {
+      "translation": "Adaptações principais",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "3e8302fbfbe3f201": {
+      "translation": "-----------------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "d94afbcff5759c30": {
+      "translation": "-----------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "24c7c0590623c49c": {
+      "translation": "**lowvision** (padrão)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "828d1fa4169fa33e": {
+      "translation": "Clareza visual",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "12203e37ac2a7e0f": {
+      "translation": "Rótulos claros, etapas numeradas, comandos SAFE",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "dfc3dc2772dbf219": {
+      "translation": "**cognitive-load**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "61464b992fa52fcf": {
+      "translation": "Redução de etapas mentais",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "11306b6be8d7158c": {
+      "translation": "Linha de objetivo, rótulos \"Primeiro/Próximo/Último\", frases mais curtas",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "26697af3d29bb44c": {
+      "translation": "**screen-reader**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "52c7aa712fd4e155": {
+      "translation": "Prioridade para áudio",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "b2c7c35f7b59e223": {
+      "translation": "Compatível com TTS, abreviações expandidas, sem referências visuais",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "7c32abb40d10989c": {
+      "translation": "**dyslexia**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "a8ca7e5990e74fbe": {
+      "translation": "Redução do atrito na leitura",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "bcb96593af57edeb": {
+      "translation": "Rótulos explícitos, sem ênfase simbólica, espaçamento extra",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "ea59a017857c701b": {
+      "translation": "**plain-language**",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "2bb0a8c3d758a6e5": {
+      "translation": "Máxima clareza",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "fb6ace06ae474003": {
+      "translation": "Uma cláusula por frase, estrutura simplificada",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "a55849c858907507": {
+      "translation": "Níveis de Confiança",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "47d1e04b68b670ac": {
+      "translation": "Significado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "1f04ef9e8cc1d860": {
+      "translation": "-------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "93982127e708d976": {
+      "translation": "------",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "e0fccb22bf0f7e95": {
+      "translation": "JSON `cli.error.v0.1` validado com ID",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "e2ac33a5829f0fef": {
+      "translation": "A ferramenta emite uma saída de erro estruturada",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "892a7c0ea5a6fc42": {
+      "translation": "Texto bruto com `(ID: ...)` detectável",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "ddca7469acbd8ace": {
+      "translation": "ID de erro encontrado em texto não estruturado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "551fe38de5905a2d": {
+      "translation": "Análise com o máximo de esforço, nenhum ID encontrado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "baa4740cb60551c3": {
+      "translation": "Sem âncora; as sugestões são heurísticas",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "a7b35045ca9e43da": {
+      "translation": "A confiança é sempre informada na saída. Ela nunca aumenta durante a transformação do perfil.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "05b06f3eb4d8d7ef": {
+      "translation": "Garantias de Segurança",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "32663e6d70f2d3f0": {
+      "translation": "O a11y-assist impõe invariantes de segurança rigorosas em tempo de execução por meio de seu sistema de Profile Guard:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "e9736cad6b528ba5": {
+      "translation": "- **Comandos \"SAFE\"** — Apenas são sugeridos comandos de leitura, testes simulados e verificações de status.\n- **Sem IDs inventados** — Os códigos de erro são provenientes da entrada ou estão ausentes; nunca são fabricados.\n- **Sem conteúdo inventado** — Os perfis reformulam, mas nunca adicionam novas informações factuais.\n- **Confiança divulgada** — Sempre exibida; pode diminuir, mas nunca aumentar.\n- **Apenas aditivo** — A saída original da ferramenta nunca é modificada, ocultada ou suprimida.\n- **Determinístico** — A mesma entrada sempre produz a mesma saída; não há chamadas de rede, nem aleatoriedade.\n- **Verificado por \"guard\"** — Cada transformação de perfil é validada em relação a invariantes antes de ser renderizada.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "01eb7d4276917eea": {
+      "translation": "Saída JSON (CI / Pipelines)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "91af0a4c61546e58": {
+      "translation": "Para automação, use `--json-response` para obter uma saída legível por máquina:",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "5f391e9e92b2150c": {
+      "translation": "Relacionado",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "4cf703fa4dd42ad0": {
+      "translation": "- [a11y-evidence-engine](https://github.com/mcp-tool-shop-org/a11y-evidence-engine) - Motor de evidências sem interface.\n- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - Ferramentas MCP para acessibilidade.\n- [a11y-demo-site](https://github.com/mcp-tool-shop-org/a11y-demo-site) - Demonstração com fluxos de trabalho de CI.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "f6c8880997fa829d": {
+      "translation": "Contribuições",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "a2dc2ee814f91ada": {
+      "translation": "Consulte [CONTRIBUTING.md](CONTRIBUTING.md) para obter diretrizes.",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "2aca9b0e72841008": {
+      "translation": "Licença",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    },
+    "8026854d56a5486a": {
+      "translation": "[MIT](LICENSE)",
+      "model": "translategemma:12b",
+      "timestamp": 1772088627689
+    }
+  }
+}

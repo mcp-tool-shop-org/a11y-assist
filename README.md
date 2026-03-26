@@ -18,7 +18,7 @@
 
 ---
 
-**v0.4 is non-interactive and deterministic.**
+**a11y-assist is non-interactive and deterministic.**
 It never rewrites tool output. It only adds an ASSIST block.
 
 ---

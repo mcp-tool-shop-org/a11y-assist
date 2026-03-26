@@ -35,13 +35,13 @@ Same input always produces the same output. There are no network calls, no rando
 
 ## Guard-checked
 
-The Profile Guard system validates every profile transform against the safety invariants before the output is rendered. If a transform would violate any invariant (for example, by introducing a non-SAFE command or inflating confidence), the guard rejects it and falls back to the default lowvision profile.
+The Profile Guard system validates every profile transform against the safety invariants before the output is rendered. If a transform would violate any ERROR-level invariant (for example, by introducing a non-SAFE command or inflating confidence), the guard rejects the output entirely and exits with code 2. It prints the guard violation codes to stderr so the issue can be diagnosed. Guard failures indicate an engine bug, not a user error.
 
 The guard checks are:
 
-1. **Command safety** -- every suggested command is checked against the SAFE allowlist
-2. **ID provenance** -- error IDs are traced back to the input
-3. **Content fidelity** -- no new factual claims added by profile transforms
-4. **Confidence monotonicity** -- confidence can only stay the same or decrease
-5. **Additivity** -- original output is preserved in full
-6. **Determinism** -- output is compared against a reference for the same input
+1. **ID provenance** -- anchored error IDs cannot be invented or changed by a profile
+2. **Confidence monotonicity** -- confidence can only stay the same or decrease, never increase
+3. **Command safety** -- every suggested command must exist in the base result's allowed set; no commands are permitted on Low confidence
+4. **Step count caps** -- each profile enforces a maximum number of plan steps (e.g., 3 for cognitive-load, 5 for lowvision)
+5. **Content support** -- plan steps and suggestions are checked against the original input text to prevent invented content (WARN level)
+6. **Profile-specific constraints** -- screen-reader and dyslexia profiles forbid parentheticals and visual navigation references; plain-language forbids parentheticals

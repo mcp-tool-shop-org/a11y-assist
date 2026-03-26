@@ -11,8 +11,9 @@ a11y-assist is deterministic, additive, and SAFE-only. It never rewrites tool ou
 
 ## What's inside
 
+- **[For Beginners](/a11y-assist/handbook/beginners/)** -- New to a11y-assist? Start here
 - **[Getting Started](/a11y-assist/handbook/getting-started/)** -- Install, configure, and run your first assisted command
-- **[Commands](/a11y-assist/handbook/commands/)** -- All 5 commands and their flags
+- **[Commands](/a11y-assist/handbook/commands/)** -- All 6 commands and their flags
 - **[Profiles](/a11y-assist/handbook/profiles/)** -- Five accessibility profiles in detail
 - **[Safety](/a11y-assist/handbook/safety/)** -- Safety guarantees and the Profile Guard system
 
